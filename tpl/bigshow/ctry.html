@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="<{$smarty.const.LOGOURL}>">
+
+    <title><{$smarty.const.WEBSITE}></title>
+<head>
+    <title>指南者</title>
+ 	<link href="tpl/bigshow/css/custom.css" rel="stylesheet">
+    <link class="include" rel="stylesheet" type="text/css" href="tpl/bigshow/js/bubleChart/jquery.jqplot.min.css" />
+	<script type="text/javascript" src="tpl/bigshow/js/jquery-1.4.2.min.js"></script>
+	<script class="include" type="text/javascript" src="tpl/bigshow/js/bubleChart/jquery.jqplot.min.js"></script>
+	<script class="include" type="text/javascript" src="tpl/bigshow/js/bubleChart/jqplot.bubbleRenderer.min.js"></script>
+
+	
+</head>
+
+
+
+<body onload='bubble(1)'>
+
+<!--气泡图翻页-->
+<ul>
+        <li><a href="<{spUrl c=main a=ctry rn=0 cg=1 cs=4}>">工科电子，前十</a></li>
+        <li><a href="<{spUrl c=main a=ctry rn=10 cg=1 cs=4}>">工科电子，10-20</a></li>
+        <li><a href="<{spUrl c=main a=ctry rn=9 cg=6 cs=2}>">商科金融，10-20</a></li>
+</ul>
+
+
+
+
+<!--气泡图表-->
+<div style="position:absolute;z-index:99;display:none;" id="tooltip1b"></div>
+ <div id="chart1" class="plot" style="width:1240px;height:625px;align:center;"></div>
+ <{foreach from=$results item=rone}>
+			
+				<h3><{$rone.num_rank}></h3>
+				<h3><{$rone.univ_rank}></h3>
+				<h3><{$rone.univ}></h3>
+				<h3><{$rone.id_rank}></h3><br />
+			
+		<{/foreach}>	
+ 
+ <script class="code" language="javascript" type="text/javascript">
+	var i=0;
+	var j=1;
+	function bubble(sign){
+		var arr=new Array();
+		
+
+
+		
+		if(1==sign){
+		<{foreach from=$results item=rone}>
+			<{if $rone.univ != null }>
+				var a1=new Array();
+				a1[0]=parseInt('<{$rone.num_rank}>');
+				a1[1]=parseInt('<{$rone.univ_rank}>');
+				a1[2]=50;
+				a1[3]='<{$rone.univ}>';
+				arr[i]=a1;
+				i=i+1;
+			<{/if}>
+		<{/foreach}>	
+		}
+		if(0==sign){
+			arr = [[60, 67,60, "Acura"], [50, 92, 55, "Alfa Romeo"]];
+			alert(i);
+		}
+		plot1 = $.jqplot('chart1',[arr],{
+	
+			seriesColors: ["c6b1cc", "#bd8ff0", "#fd9fc5", "#daf0c5",  "#a6b1da", "#5ec0af", 
+						"#ff9898", "#e9b3f3", "#a7eae7", "#4eb8ed" ], 
+			title: 'Transparent Bubbles',
+			seriesDefaults:{
+				renderer: $.jqplot.BubbleRenderer,
+				shadow: false
+			},
+			axesDefaults: {
+				tickOptions: {
+					fontSize:'15px', 
+					showGridline: false
+				}
+			},
+			grid: { 
+				background: '#7ebde8',
+				shadow: false
+			}
+		}); 
+		$('#chart1').click( function(ev, seriesIndex, pointIndex, data){
+			var id=41;
+			$.get('<{spUrl c=main a=index}>');
+		
+		});
+		$('#chart1').bind('jqplotDataHighlight', 
+			function (ev, seriesIndex, pointIndex, data, radius) {    
+				var chart_left = $('#chart1').offset().left,
+					chart_top = $('#chart1').offset().top,
+					x = plot1.axes.xaxis.u2p(data[0]),  // convert x axis unita to pixels on grid
+					y = plot1.axes.yaxis.u2p(data[1]);  // convert y axis units to pixels on grid
+				var color = 'rgb(100%,50%,100%)';
+				$('#tooltip1b').css({left:chart_left+x+radius+10, top:chart_top+y-radius});
+				$('#tooltip1b').html('<span style="font-size:14px;font-weight:bold;color:'+color+';">' + 
+				data[3] + '</span><br />' + '专业排名： '+data[0] + '<br />' + '学校排名: ' + 
+				data[1] + '<br />' );
+				$('#tooltip1b').show();
+		});
+		$('#chart1').bind('jqplotDataUnhighlight', 
+			function (ev, seriesIndex, pointIndex, data) {
+				$('#tooltip1b').empty();
+				$('#tooltip1b').hide();
+			});
+		
+		j++;
+	} 
+	</script>
+ 
+</body>
+
+
+</html>

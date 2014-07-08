@@ -1042,4 +1042,55 @@ class main extends spController
             $this->error("用户名和绑定微信号不符，请重新输入！", spUrl("main","weid",array("id"=>$id)));
         }
 	}
+
+
+
+	//显示国家排名信息
+	function ctry(){
+		if($this->spArgs("rn")){
+			$rn = $this->spArgs("rn"); //接受参数cg
+			$rn=(int)$rn;
+		}else{
+			$rn = 0;  //第一次1取前10名；
+		}
+		
+		
+		
+		if($this->spArgs("cg")){
+			$cg = $this->spArgs("cg"); //接受参数cg
+		}else{
+			$cg = 1;  //默认工科
+		}
+		if($this->spArgs("cs")){
+			$cs = $this->spArgs("cs"); //接受参数cls
+		}else{
+			$cs = 25;  //默认机械工程
+		}
+		
+		//专业类别
+		$cate=spClass("category");
+		$this->cate = $cate->findAll(); // 返回所有专业大类
+		
+		//该专业类别下的所有专业
+		$clss=spClass("classes");
+		$condition1=array('cate_clss'=>$cg);
+		$this->clss = $clss->findAll($condition1); // 返回所属专业
+		
+		
+		
+		//专业排名的大学信息
+		$rank=spClass("rank");
+		$sql="select id_rank,num_rank,univ_rank,univ from tb_rank where clss_rank=$cs limit $rn,10";
+		
+		$this->results = $rank->findSql($sql);
+		$this->cg =$cg;
+		$this->cs =$cs;
+		$this->rn =$rn;
+		
+		$this->display("bigshow/ctry.html");
+
+	}
+
+
+
 }	
