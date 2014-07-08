@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="留学,海外,英国学校,香港学校,香港学校，留学费用，入学时间">
+    <meta name="description" content="英国学校香港学校新加坡学校，名校数据库，海外知名大学学院专业排名详细信息申请条件留学费用入学时间。">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="<{$smarty.const.LOGOURL}>" type="image/x-icon" />
+    <title><{$smarty.const.WEBSITE}></title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link href="tpl/bigshow/css/custom.css" rel="stylesheet">
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    
+  </head>
+
+  <body class="background-public">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <{include file="tpl/bigshow/top.html"}> 
+    </div>
+
+    <div class="row banner-univ">
+      <div class="container">
+        <div class="col-lg-12">
+          <h2>SEARCH UNIVERSITY</h2>
+          <p>学校搜索结果</p>
+        </div>
+      </div><!-- /container univ-index -->
+    </div><!-- /.row -->   
+
+    <div class="container search-container">
+      <div class="row">
+        <div class="col-md-9">
+          <form class="input-group input-group-lg" method="post" action="<{spUrl c=query a=univs}>">
+            <input name="kwds" type="text" class="form-control search-border" value="<{$kwds}>">
+            <span class="input-group-btn">
+              <button class="btn btn-default search-border" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+            </span>
+          </form>
+
+          <div class="selection-search">
+            <ul class="nav nav-pills">
+              <li><a href="<{spUrl c=query a=infos kwds=$kwds}>">留学资讯</a></li>
+              <li><a href="<{spUrl c=query a=succs kwds=$kwds}>">成功案例</a></li>
+              <li class="active"><a href="<{spUrl c=query a=univs kwds=$kwds}>">学校库</a></li>
+              <li><a href="<{spUrl c=query a=majrs kwds=$kwds}>">专业库</a></li>
+            </ul>
+          </div><!-- selection-public --> 
+
+          <div class="container-public">
+            <{if $university[0]==""}>
+              <div class="alert alert-info">
+                没有搜索到<strong><{$kwds}></strong>相关的<{$position}>，试试其他关键词，呵呵
+              </div>
+            <{else}>
+            <{foreach name=univ from=$university item=one}>
+
+              <div class="list-univ">
+                <div class="img-list-univ hidden-xs">
+                  <a href="<{spUrl c=main a=major 
+            id=$one.id_univ cy=$one.ctry_univ py=$one.py_univ}>" target="_blank">
+                    <img alt="<{$one.cname_univ}>" src="<{$smarty.const.DM_UNIV}><{$one.logo_univ}>" class="img-responsive">
+                  </a>
+                </div>
+                <div class="content-list-univ">
+                  <a href="<{spUrl c=main a=major 
+            id=$one.id_univ cy=$one.ctry_univ py=$one.py_univ}>" target="_blank">
+                    <h3 class="title-list-univ"><{$one.cname_univ}></h3>
+                    <h5 class="time-list-publict"><{$one.ename_univ}></h5>
+                    <p><{$one.desc_univ|strip_tags|truncate:100:"……":true}></p>
+                  </a>
+                  <p>
+                  <!--  <script type="text/javascript">
+                      var tag ="<{$one.kws_univ}>";
+                      var tags =  tag.split(",");
+                      for (var i in tags){
+                          document.write("<span class=\"label label-default\">"+ tags[i] +"</span>&nbsp" );
+                      }
+                    </script>-->
+                  </p>
+                </div>
+                <div class="rank-list-univ hidden-xs">
+                  <span class="glyphicon glyphicon-star star-public"></span>
+                  <span class="glyphicon glyphicon-star star-public"></span>
+                  <span class="glyphicon glyphicon-star star-public"></span>
+                  <span class="glyphicon glyphicon-star star-public"></span>
+                  <span class="glyphicon glyphicon-star-empty star-public"></span>  
+                  <a href="<{spUrl c=main a=major 
+                  id=$one.id_univ cy=$one.ctry_univ py=$one.py_univ}>" target="_blank">
+                    <button type="button" class="btn btn-primary">查看更多</button>
+                  </a>
+
+                </div>    
+              </div><!-- list-univ -->
+            <{/foreach}>              
+            
+            <ul class="pagination pagination-pulbic">  
+              <{if $pager}>
+                <{if $pager.current_page != $pager.first_page}>
+                  <li><a href="<{spUrl c=query a=univs kwds=$kwds page=$pager.first_page }>">&laquo;</a></li>
+                <{else}>
+                  <li class="disabled"><a href="#">&laquo;</a></li>
+                <{/if}>
+                <!--开始循环页码，同时如果循环到当前页则不显示链接-->
+                <{foreach from=$pager.all_pages item=thepage}>
+                  <{if $thepage >= $curpage and $thepage <= $curpage+10 }>
+                    <{if $thepage != $pager.current_page}>
+                      <li><a href="<{spUrl c=query a=univs kwds=$kwds page=$thepage}>"><{$thepage}></a></li>
+                    <{else}>
+                      <li class="active"><span><{$thepage}><span class="sr-only">(current)</span></span></li>
+                    <{/if}>
+                  <{/if}>  
+                <{/foreach}>
+                <!--在当前页不是最后一页的时候，显示下一页和后页-->
+                <{if $pager.current_page != $pager.last_page}>
+                  <li><a href="<{spUrl c=query a=univs kwds=$kwds page=$pager.next_page}>">»</a></li>
+                <{else}>
+                  <li><a class="disabled" href="#">»</a></li>
+                <{/if}>
+              <{/if}>
+            </ul>
+          <{/if}>
+          </div><!-- container-public -->
+        </div><!-- col-md-9 -->
+
+        <{include file="tpl/bigshow/side.html"}>
+      </div><!-- row -->  
+    </div>
+
+
+   
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js">
+    </script>
+    <!--移动代码到js后面防止js失效-->
+     <footer>
+      <{include file="tpl/bigshow/bottom.html"}> 
+      <!--调用geturl方法加载底部文件-->
+    </footer>
+  
+<!-- compassedu.hk Baidu tongji analytics -->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fd998a0e3652a82db1c29206a0a3b2e3e' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</body>
+</html>

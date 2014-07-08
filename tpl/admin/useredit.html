@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+<script charset="utf-8" src="tpl/include/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="tpl/include//kindeditor/lang/zh_CN.js"></script>
+</HEAD>
+<BODY >
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background=tpl/admin/images/title_bg1.jpg>当前位置: </TD></TR>
+</TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=20>
+    <TD></TD></TR>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background=tpl/admin/images/title_bg2.jpg>用户权限修改</TD></TR>
+  </TABLE>
+<form id="edit" name="edit" method="post" action="<{spUrl c=perms a=save 
+            name=$name}>">
+  <p>&nbsp;</p>
+  <table cellSpacing=0 cellPadding=0 width="29%" align="center" border="1" bordercolor="#CCCCCC" bordercolordark="">
+    <tr>
+      <td width="30%" height="30" align="center">用户名：
+      </td>
+        <td width="70%" height="30" ><{$name}></td>
+    </tr>
+    <tr>
+    	<td height="30" align="center">权限组：
+        </td>
+        <td width="70%" height="30" ><label>
+          <select name="groupn" id="groupn">
+          	<{if $group=="GBUSER"}>
+            	<option value="GBUSER">普通管理员</option>
+            	<option value="GBADMIN">高级管理员</option>
+            	<option value="SALES">销售人员</option>
+            <{elseif  $group=="SALES"}>
+            	<option value="SALES">销售人员</option>
+            	<option value="GBADMIN">高级管理员</option>
+          		<option value="GBUSER">普通管理员</option>	
+            <{else}>
+            	<option value="GBADMIN">高级管理员</option>
+          		<option value="GBUSER">普通管理员</option>
+          		<option value="SALES">销售人员</option>
+            <{/if}>
+          </select>
+        </label></td>
+    </tr>
+  </table>
+  <p align="center">&nbsp;</p>
+  <p align="center">&nbsp;&nbsp;&nbsp;
+    <input name="save" type="submit" value="保存">&nbsp;&nbsp;&nbsp;
+    <input name="quit" type="button" value="取消" 
+        onClick="Javascript:window.history.go(-1)">
+  </p>
+  </form>
+</BODY>
+</HTML>   

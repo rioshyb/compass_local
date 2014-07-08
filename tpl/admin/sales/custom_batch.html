@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+	function formchk(){
+ 		var addform=document.edit;
+ 		if (addform.univ.value==""||
+			addform.major.value==""||addform.english.value==""||addform.email.value==""||
+			addform.address.value=="" ||addform.code.value==""||
+			addform.tel.value=="" ){
+  			alert("信息不能为空!");
+  			return false;   //不提交表单
+ 		}else if (isnumber(addform.code.value)==false){
+			alert("邮编名必须为数字");
+  			addform.code.focus();   //用户名输入框获得焦点
+  			return false;   //不提交表单	
+		}else if (isnumber(addform.tel.value)==false){
+			alert("电话号码必须为数字");
+  			addform.tel.focus();   //用户名输入框获得焦点
+  			return false;   //不提交表单	
+		}else{
+ 			return true;   //输入符合要求后执行表单提交操作
+		}
+	}
+	
+	function isnumber(str){
+      var reg = /^[0-9]{1,20}$/;
+      if(!reg.test(str)){
+       return false;
+      }
+      return true;
+	}
+</script>
+</HEAD>
+<BODY >
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background="tpl/admin/images/title_bg1.jpg">当前位置：<font color='#0000CC'><{$position}></font></TD></TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR>
+  <TR height=20>
+    <TD background="tpl/admin/images/shadow_bg.jpg" ></TD></TR></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background="tpl/admin/images//title_bg2.jpg" >进度信息批量修改</TD></TR>
+  </TABLE> 
+
+
+<form id="edit" name="edit" method="post"  enctype="multipart/form-data"  action="<{spUrl c=sales a=editb}>">
+	<br/>
+    <TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+      <tr>
+      <td>文件名：<input name="file" type ="file" id="file" size="40">&nbsp;&nbsp;&nbsp;
+      <input name="save" type="submit" value="修改" onClick="return formchk();">
+      </td>
+  </tr>
+  </TABLE>
+  </form>
+  <TABLE width="95%" align=center>
+  	<tr><td><font size="+1">更新记录</font></td></tr>
+	<{foreach from=$results item=one}>
+  	<tr><td><font size="+1"><{$one.user}></font></td></tr>
+    <{if $one.type == 2}>
+    	<tr><td>&nbsp;&nbsp;
+    		<b>申请专业</b>(<{$one.content.majr_aply}>)&nbsp;
+            <b>申请状态</b>(<{$one.content.state_aply}>)&nbsp;
+            <b>申请账号</b>(<{$one.content.account_aply}>)&nbsp;
+            <b>申请结果</b>(<{$one.content.result_aply}>)&nbsp;
+            <b>费用情况</b>(<{$one.content.notice_aply}>)&nbsp;
+        </td></tr> 
+    <{elseif $one.type == 1}>
+    	<tr><td>&nbsp;&nbsp;
+    		<b>RL1</b>(<{$one.content.recd1_mate}>)&nbsp;
+            <b>RL2</b>(<{$one.content.recd2_mate}>)&nbsp;
+            <b>CV</b>(<{$one.content.cv_mate}>)&nbsp;
+            <b>PS</b>(<{$one.content.ps_mate}>)&nbsp;
+            <b>申请表</b>(<{$one.content.aply_mate}>)&nbsp;
+            <b>纸质材</b>料(<{$one.content.pic_mate}>)&nbsp;
+            <b>电子版材料</b>(<{$one.content.acdc_mate}>)&nbsp;
+        </td></tr> 
+    <{else}>
+    	<tr><td>&nbsp;&nbsp;
+    		<b>签证申请</b>(<{$one.content.visa_tour}>)&nbsp;
+            <b>住房情况</b>(<{$one.content.rent_tour}>)&nbsp;
+            <b>机票预订</b>(<{$one.content.ticket_tour}>)&nbsp;
+            <b>其他材料</b>(<{$one.content.other_tour}>)&nbsp;
+        </td></tr> 
+    <{/if}>
+    <tr><td height="10"></td></tr> 
+	<{/foreach}>
+  </TABLE>
+</BODY>
+</HTML>

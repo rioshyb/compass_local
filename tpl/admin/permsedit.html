@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+</HEAD>
+<BODY >
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background=tpl/admin/images/title_bg1.jpg>当前位置: </TD></TR>
+</TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=20>
+    <TD></TD></TR>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background=tpl/admin/images/title_bg2.jpg>权限修改</TD></TR>
+  </TABLE>
+   <{foreach from=$acl item=one}>  
+<form id="edit" name="edit" method="post" action="<{spUrl c=perms a=savep 
+            id=$one.aclid}>">
+  <p>&nbsp;</p>
+  <table width="29%" height="140" border="1" align="center" cellPadding=0 cellSpacing=0 bordercolor="#CCCCCC" bordercolordark="">
+ 
+    <tr>
+      <td width="30%" height="30" align="center">功能说明：
+      </td>
+        <td width="70%" height="20" ><label>
+          <input name="name" type="text" id="name" size="15" value="<{$one.name}>">
+        </label></td>
+    </tr>
+    <tr>
+      <td width="30%" height="30" align="center">控制器名：
+    </td>
+        <td width="70%" height="30" ><label>
+          <input name="controller" type="text" id="controller" size="15" value="<{$one.controller}>">
+        </label></td>
+    </tr>
+    <tr>
+      <td width="30%" height="30" align="center">操作名称：
+    </td>
+        <td width="70%" height="30" ><label>
+          <input name="action" type="text" id="action" size="15" value="<{$one.action}>">
+        </label></td>
+    </tr>
+    <tr>
+    	<td height="30" align="center">权限组名：
+        </td>
+        <td width="70%" height="30" ><label>
+          <select name="acl_name" id="acl_name">
+          	<{if $one.acl_name=="GBUSER"}>
+            	<option value="GBUSER">普通管理员</option>
+            	<option value="GBADMIN">高级管理员</option>
+            <{else}>
+            	<option value="GBADMIN">高级管理员</option>
+          		<option value="GBUSER">普通管理员</option>
+            <{/if}>
+          </select>
+        </label></td>
+    </tr>
+   
+  </table>
+  <p>&nbsp;</p>
+  <p align="center">&nbsp;&nbsp;&nbsp;
+    <input name="save" type="submit" value="保存">&nbsp;&nbsp;&nbsp;
+    <input name="quit" type="button" value="取消" 
+        onClick="Javascript:window.history.go(-1)">
+  </p>
+  </form>
+  <{/foreach}>
+</BODY>
+</HTML>   

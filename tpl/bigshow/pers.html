@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="<{$smarty.const.LOGOURL}>" type="image/x-icon" />
+
+    <title><{$smarty.const.WEBSITE}></title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link href="tpl/bigshow/css/custom.css" rel="stylesheet">
+
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+  </head>
+
+  <body class="background-public">
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+     <{include file="tpl/bigshow/top.html"}> 
+    </div>
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="breadcrumb breadcrumb-public">
+            <li><a href="<{spUrl c=main a=index}>">首页</a></li>
+            <li class="active"><a href="#">个人中心</a></li>
+          </ul>
+          <hr class="divider-public">
+        </div>
+      </div>
+    </div><!-- breadcrumb container -->
+
+    <div class="container">
+      <div class="row  top-mate">
+        <div class="col-md-3 col-sm-4">
+           <{include file="tpl/bigshow/user.html"}>  
+        </div><!-- col-md-3 -->
+            <{include file="tpl/bigshow/menu_xs.html"}>  
+        <div class="col-md-9 col-sm-8 top-progress-pulic">
+          <{include file="tpl/bigshow/progress.html"}>
+        </div><!-- col-md-9 -->
+
+      </div><!-- row -->  
+
+      <div class="row sidebar-bgcolor">
+        <div class="col-md-3 col-sm-4 hidden-xs public-col-nopadding">
+          <{include file="tpl/bigshow/sidebar.html"}>
+        </div><!-- col-md-3 -->
+
+        <div class="col-md-9 col-sm-8 main-bgcolor public-col-noright">
+          <div class="menu-collapse">
+            <h3><span class="glyphicon glyphicon-user"></span></i>&nbsp个人资料</a></h3>
+          </div>
+
+          <div class="part-mate">
+            <{foreach from=$custom item=one}>
+            <div class="title-part-mate"><h4><{$one.cname_cust}> <small><{$one.name_cust}></small></h4></div>    
+                <div class="part-person">
+                  <form class="form-horizontal" role="form" id="edit" name="edit" method="post"  enctype="multipart/form-data"  action="<{spUrl c=main a=savec id=$one.id_cust}>">
+                    <div class="form-group"> 
+                      <label for="university" class="col-sm-2 control-label">毕业学校：</label> 
+                      <div class="col-sm-10"> 
+                        <input type="text" class="form-control" name="univ" id="univ" value="<{$one.univ_cust}>" > 
+                      </div> 
+                    </div> 
+                    <div class="form-group"> 
+                      <label for="major" class="col-sm-2 control-label">本科专业：</label> 
+                      <div class="col-sm-10"> 
+                        <input class="form-control" name="major" type="text" id="major" value="<{$one.major_cust}>"  > 
+                      </div> 
+                    </div> 
+                    <div class="form-group"> 
+                      <label for="item" class="col-sm-2 control-label">英语成绩：</label> 
+                      <div class="col-sm-10"> 
+                        <input class="form-control" name="english" type="text" id="english" value="<{$one.english_cust}>" > 
+                      </div>
+                    </div>                     
+                    <div class="form-group"> 
+                      <label for="username" class="col-sm-2 control-label">电子邮箱：</label> 
+                      <div class="col-sm-10"> 
+                        <input type="email" class="form-control" name="email" id="email" size="25" value="<{$one.email_cust}>"> 
+                      </div> 
+                    </div> 
+                    <div class="form-group"> 
+                      <label for="tel" class="col-sm-2 control-label">手机号码：</label> 
+                      <div class="col-sm-10"> 
+                        <input type="text" class="form-control" id="tel" name="tel" value="<{$one.tel_cust}>" > 
+                      </div> 
+                    </div> 
+                    <div class="form-group"> 
+                      <label for="code" class="col-sm-2 control-label">邮政编码：</label> 
+                      <div class="col-sm-10"> 
+                        <input type="text" class="form-control" input name="code" id="code" size="25" value="<{$one.code_cust}>"> 
+                      </div> 
+                    </div> 
+                    <div class="form-group"> 
+                      <label for="address" class="col-sm-2 control-label">联系地址：</label> 
+                      <div class="col-sm-10"> 
+                        <input type="text" class="form-control" name="address" id="address" size="55" value="<{$one.address_cust}>" > 
+                      </div> 
+                    </div>
+                    <div class="form-group"> 
+                      <div class="col-sm-10 col-sm-offset-2"> 
+                        <button type="submit" class="btn btn-primary">修改资料</button> &nbsp;&nbsp;
+                        <a href="<{spUrl c=main a=order ts=1}>"><button type="button" class="btn btn-default">取消</button></a>
+                      </div> 
+                    </div>                      
+                  </form>
+                </div>
+              </div>
+            <{/foreach}>
+          </div>
+        </div><!-- col-md-9 -->
+      </div><!-- row -->  
+    </div>
+
+
+    <footer>
+      <{include file="tpl/bigshow/bottom.html"}>
+    </footer>
+   
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js">
+    </script>
+  
+<!-- compassedu.hk Baidu tongji analytics -->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fd998a0e3652a82db1c29206a0a3b2e3e' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</body>
+</html>

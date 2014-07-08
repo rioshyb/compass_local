@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="<{$smarty.const.LOGOURL}>">
+
+    <title><{$smarty.const.WEBSITE}></title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link href="tpl/bigshow/css/custom.css" rel="stylesheet">
+
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <script type="text/javascript">
+       var mt = ["客户初稿准备中","已收到客户初稿，尚未反馈客户意见","初稿定稿，英文稿准备中","完成英文稿，已发客户确认中","客户反馈英文稿意见，英文稿修改中","定稿"];
+       var apply = ["客户准备中","已收到"];
+       var em = ["客户准备中","电子版材料已齐全"];
+       var pm = ["未收到","已收到"];
+    </script>
+  </head>
+    
+  </head>
+
+  <body class="background-public">
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <{include file="tpl/bigshow/top.html"}> 
+    </div>
+  
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="breadcrumb breadcrumb-public">
+            <li><a href="<{spUrl c=main a=index}>">首页</a></li>
+            <li class="active"><a href="#">个人中心</a></li>
+          </ul>
+          <hr class="divider-public">
+        </div>
+      </div>
+    </div><!-- breadcrumb container -->
+
+    <div class="container">
+      <div class="row  top-mate">
+        <div class="col-md-3 col-sm-4">
+          <{include file="tpl/bigshow/user.html"}>  
+        </div><!-- col-md-3 -->
+          <{include file="tpl/bigshow/menu_xs.html"}>
+        <div class="col-md-9  col-sm-8 top-progress-pulic">
+          <{include file="tpl/bigshow/progress.html"}> 
+        </div><!-- col-md-9 -->
+
+      </div><!-- row -->  
+
+      <div class="row  sidebar-bgcolor">
+        <div class="col-md-3 col-sm-4 hidden-xs public-col-nopadding">
+          <{include file="tpl/bigshow/sidebar.html"}>
+        </div><!-- col-md-3 --> 
+
+        <div class="col-md-9 col-sm-8  main-bgcolor">
+          <div class="menu-collapse">
+            <h3><span class="glyphicon glyphicon-list"></span>&nbsp材料清单</h3>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12 public-col-noright">
+              <div class="part-mate letter1-mate">
+              <div class="title-part-mate">推荐信一</div>
+              
+                <div  class="frame-part-mate">
+                  <div class="chart-part-mate">
+                    <span><{($counts['recd1_mate']/6*100)|string_format:"%d"}>%</span>  
+                    <canvas id="canvas-letter1" height="200" width="200" style="width:200px; height: 200px;"></canvas>
+                  </div>
+                </div>    
+                <div class="list-part-mate">
+                  <ul>
+                    <script type="text/javascript">
+                      var mts = <{$counts['recd1_mate']}>;
+                      for(var i in mt){
+                        if(i < mts){                       
+                          document.write("<li>"+mt[i]+"<span class=\"glyphicon glyphicon-ok-sign\"></span></li>");
+                        }else{
+                            document.write("<li class=\"none\">"+mt[i]+"</li>"); 
+                        }
+                      }
+                    </script>
+                  </ul>
+                </div>
+              </div>
+            </div><!-- col-md-6 part-mate -->
+
+            <div class="col-md-6 col-sm-12 col-xs-12 public-col-noright">
+              <div class="part-mate letter2-mate">
+              <div class="title-part-mate">推荐信二</div>
+              
+                <div  class="frame-part-mate">
+                  <div class="chart-part-mate">
+                    <span><{($counts['recd2_mate']/6*100)|string_format:"%d"}>%</span>  
+                    <canvas id="canvas-letter2" height="200" width="200" style="width:200px; height: 200px;"></canvas>
+                  </div>
+                </div>    
+                <div class="list-part-mate">
+                  <ul>                 
+                    <script type="text/javascript">
+                      var mts = <{$counts['recd2_mate']}>;
+                      for(var i in mt){
+                        if(i < mts){                       
+                          document.write("<li>"+mt[i]+"<span class=\"glyphicon glyphicon-ok-sign\"></span></li>");
+                        }else{
+                            document.write("<li class=\"none\">"+mt[i]+"</li>"); 
+                        }
+                      }
+                    </script>
+                  </ul>
+
+                </div>
+              </div>
+           
+            </div><!-- col-md-6 part-mate -->
+
+            <div class="col-md-6 col-sm-12 col-xs-12 public-col-noright">
+              <div class="part-mate cv-mate">
+              <div class="title-part-mate">简历(CV)</div>
+              
+                <div  class="frame-part-mate">
+                  <div class="chart-part-mate">
+                    <span><{($counts['cv_mate']/6*100)|string_format:"%d"}>%</span>  
+                    <canvas id="canvas-cv" height="200" width="200" style="width:200px; height: 200px;"></canvas>
+                  </div>
+                </div>    
+                <div class="list-part-mate">
+                  <ul>
+                    <script type="text/javascript">
+                      var mts = <{$counts['cv_mate']}>;
+                      for(var i in mt){
+                        if(i < mts){                       
+                          document.write("<li>"+mt[i]+"<span class=\"glyphicon glyphicon-ok-sign\"></span></li>");
+                        }else{
+                            document.write("<li class=\"none\">"+mt[i]+"</li>"); 
+                        }
+                      }
+                    </script>
+                  </ul>
+                </div>
+              </div>
+            </div><!-- col-md-6 part-mate -->
+
+            <div class="col-md-6 col-sm-12 col-xs-12 public-col-noright">
+              <div class="part-mate ps-mate">
+              <div class="title-part-mate">个人陈述(PS)</div>
+              
+                <div  class="frame-part-mate">
+                  <div class="chart-part-mate">
+                    <span><{($counts['ps_mate']/6*100)|string_format:"%d"}>%</span>  
+                    <canvas id="canvas-ps" height="200" width="200" style="width:200px; height: 200px;"></canvas>
+                  </div>
+                </div>    
+                <div class="list-part-mate">
+                  <ul>
+                    <script type="text/javascript">
+                      var mts = <{$counts['ps_mate']}>;
+                      for(var i in mt){
+                        if(i < mts){                       
+                          document.write("<li>"+mt[i]+"<span class=\"glyphicon glyphicon-ok-sign\"></span></li>");
+                        }else{
+                            document.write("<li class=\"none\">"+mt[i]+"</li>"); 
+                        }
+                      }
+                    </script>
+                  </ul>
+
+                </div>
+              </div>
+           
+            </div><!-- col-md-6 part-mate -->
+
+            <div class="col-md-6 col-sm-12 col-xs-12 public-col-noright">
+              <div class="part-mate apply-mate">
+              <div class="title-part-mate">申请表</div>
+              
+                <div  class="frame-part-mate">
+                  <div class="chart-part-mate">
+                    <span><{($counts['aply_mate']/2*100)|string_format:"%d"}>%</span>  
+                    <canvas id="canvas-apply" height="200" width="200" style="width:200px; height: 200px;"></canvas>
+                  </div>
+                </div>    
+                <div class="list-part-mate">
+                  <ul>
+                    <script type="text/javascript">
+                      var mts = <{$counts['aply_mate']}>;
+                      for(var i in apply){
+                        if(i < mts){                       
+                          document.write("<li>"+apply[i]+"<span class=\"glyphicon glyphicon-ok-sign\"></span></li>");
+                        }else{
+                            document.write("<li class=\"none\">"+apply[i]+"</li>"); 
+                        }
+                      }
+                    </script>
+                  </ul>
+                </div>
+              </div>
+            </div><!-- col-md-6 part-mate -->
+
+            <div class="col-md-6 col-sm-12 col-xs-12 public-col-noright">
+              <div class="part-mate em-mate">
+              <div class="title-part-mate">电子版材料</div>
+              
+                <div  class="frame-part-mate">
+                  <div class="chart-part-mate">
+                    <span><{($counts['acdc_mate']/2*100)|string_format:"%d"}>%</span>  
+                    <canvas id="canvas-em" height="200" width="200" style="width:200px; height: 200px;"></canvas>
+                  </div>
+                </div>    
+                <div class="list-part-mate">
+                  <ul>
+                    <script type="text/javascript">
+                      var mts = <{$counts['acdc_mate']}>;
+                      for(var i in em){
+                        if(i < mts){                       
+                          document.write("<li>"+em[i]+"<span class=\"glyphicon glyphicon-ok-sign\"></span></li>");
+                        }else{
+                            document.write("<li class=\"none\">"+em[i]+"</li>"); 
+                        }
+                      }
+                    </script>
+                  </ul>
+                </div>
+              </div>
+            </div><!-- col-md-6 part-mate -->
+
+            <div class="col-md-6 col-sm-12 col-xs-12 public-col-noright">
+              <div class="part-mate pm-mate">
+              <div class="title-part-mate">纸质材料</div>
+              
+                <div  class="frame-part-mate">
+                  <div class="chart-part-mate">
+                    <span><{($counts['pic_mate']/2*100)|string_format:"%d"}>%</span>  
+                    <canvas id="canvas-pm" height="200" width="200" style="width:200px; height: 200px;"></canvas>
+                  </div>
+                </div>    
+                <div class="list-part-mate">
+                  <ul>
+                    <script type="text/javascript">
+                      var mts = <{$counts['pic_mate']}>;
+                      for(var i in pm){
+                        if(i < mts){                       
+                          document.write("<li>"+pm[i]+"<span class=\"glyphicon glyphicon-ok-sign\"></span></li>");
+                        }else{
+                            document.write("<li class=\"none\">"+pm[i]+"</li>"); 
+                        }
+                      }
+                    </script>
+                  </ul>
+                </div>
+              </div>
+            </div><!-- col-md-6 part-mate -->
+
+          </div>
+
+        </div><!-- col-md-9 -->
+      </div><!-- row -->  
+    </div>
+
+
+    <footer>
+      <{include file="tpl/bigshow/bottom.html"}> 
+    </footer>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js">
+    </script>
+    <script src="tpl/bigshow/js/Chart.js"></script>
+    <script>
+    var letter1 = [{value:Number("<{$counts['recd1_mate']}>"+0.01),color:"#F7464A"},{value:Number("<{6-$counts['recd1_mate']}>"+0.01),color:"#f2f2f2"}];
+    var myDoughnut = new Chart(document.getElementById("canvas-letter1").getContext("2d")).Doughnut(letter1);
+
+    var letter2 = [ {value: Number("<{$counts['recd2_mate']}>"+0.01), color:"#46BFBD"}, { value : Number("<{6-$counts['recd2_mate']}>"+0.01), color : "#f2f2f2" } ];
+    var myDoughnut = new Chart(document.getElementById("canvas-letter2").getContext("2d")).Doughnut(letter2);
+
+    var cv = [{value:Number("<{$counts['cv_mate']}>"+0.01),color:"#FDB45C"},{value:Number("<{6-$counts['cv_mate']}>"+0.01),color:"#f2f2f2"}];
+    var myDoughnut = new Chart(document.getElementById("canvas-cv").getContext("2d")).Doughnut(cv);
+
+    var ps = [ {  value: Number("<{$counts['ps_mate']}>"+0.01), color:"#4ba6e5"}, { value : Number("<{6-$counts['ps_mate']}>"+0.01), color : "#f2f2f2" } ];
+    var myDoughnut = new Chart(document.getElementById("canvas-ps").getContext("2d")).Doughnut(ps);
+  
+    var apply = [ {  value: Number("<{$counts['aply_mate']}>"+0.01), color:"#69D2E7"}, { value : Number("<{2-$counts['aply_mate']}>"+0.01), color : "#f2f2f2" } ];
+    var myDoughnut = new Chart(document.getElementById("canvas-apply").getContext("2d")).Doughnut(apply);
+
+    var em = [ {  value: Number("<{$counts['acdc_mate']}>"+0.01), color:"#4D5360"}, { value : Number("<{2-$counts['acdc_mate']}>"+0.01), color : "#f2f2f2" } ];
+    var myDoughnut = new Chart(document.getElementById("canvas-em").getContext("2d")).Doughnut(em);
+
+    var pm = [ {  value: Number("<{$counts['pic_mate']}>"+0.01), color:"#af64cc"}, { value : Number("<{2-$counts['pic_mate']}>"+0.01), color : "#f2f2f2" } ];
+    var myDoughnut = new Chart(document.getElementById("canvas-pm").getContext("2d")).Doughnut(pm);
+  </script>
+  
+<!-- compassedu.hk Baidu tongji analytics -->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fd998a0e3652a82db1c29206a0a3b2e3e' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</body>
+</html>

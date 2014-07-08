@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+</HEAD><script language="javascript">
+	function is_confirm(msg)
+	{
+		if(confirm(msg)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+</script>
+<BODY>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background="tpl/admin/images/title_bg1.jpg">当前位置: <font color='#0000CC'><{$position}></font></TD></TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR>
+  <TR height=20>
+    <TD background="tpl/admin/images/shadow_bg.jpg" ></TD></TR></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background="tpl/admin/images/title_bg2.jpg" ><{$position}>列表</TD></TR>
+  </TABLE>
+<p>&nbsp;</p>
+<table width="60%" align="center" border="1px" cellspacing="0px" bordercolor="#CCCCCC">
+  <tr bgcolor="#97D6FF">
+            <td height="25" width="26%" align="center">专业中文名</td>
+            <td height="25" width="47%" align="center">专业英文名</td>
+            <td height="25" width="27%" align="center">操作</td>
+        </tr> 
+          <{foreach from=$category item=one}>
+          <tr>
+            <td height="20" width="26%" align="center">&nbsp;&nbsp;<{$one.cname_cate}></td>
+            <td height="20" width="47%" align="center"><{$one.ename_cate}></td>
+            <td height="20" width="27%" align="center"><a href="<{spUrl c=admin a=addy}>" >新增</a>/ 
+            <a href="<{spUrl c=super a=edity id=$one.id_cate}>" >修改</a>/
+            <a href="<{spUrl c=super a=dely id=$one.id_cate}>" 
+            	onclick="return is_confirm('确认要删除吗?');">删除</a>&nbsp;&nbsp;</td>
+       </tr> 
+       <{/foreach}>
+</table> 
+</BODY></HTML>

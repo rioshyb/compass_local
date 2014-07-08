@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><{$smarty.const.WEBSITE}></title>
+<link href="tpl/bigshow/css/index.css" type="text/css" rel="stylesheet" /> 
+<link rel="shortcut icon" href="<{$smarty.const.LOGOURL}>" type="image/x-icon" />
+<script type="text/javascript" language="javascript" src="tpl/bigshow/js/JTimer/JTimer_2.0.js"></script>
+<script type="text/javascript">
+<!-- 
+(function (d) {
+window.bd_cpro_rtid="P1n4nHf";
+var s = d.createElement("script");s.type = "text/javascript";s.async = true;s.src = location.protocol + "//cpro.baidu.com/cpro/ui/rt.js";
+var s0 = d.getElementsByTagName("script")[0];s0.parentNode.insertBefore(s, s0);
+})(document);
+//-->
+</script>
+</head>
+<body>
+<div id="container">
+  <!--页面层容器-->
+  <div id="Header_news">
+    <!--页面头部-->
+  	<{include file="tpl/bigshow/top.html"}>	
+  </div>  
+  <div id="PageBody">
+    <!--主体思想-->
+    
+    <div id="MainBody">
+      <!--主体内容-->
+     <div class="position_univ"><span>当前位置 >> <a href="<{spUrl c=main a=index}>">网站首页</a> >> <{$position}></div>
+		<div class="country">
+    		<div class="title"><{$position}></div>   
+     		<table align="center" width="100%">
+            <tr>
+            <td><img src="tpl/bigshow/images/submitkf.jpg" height="140" /></td><td width="10"></td><td style="font-family:'微软雅黑'; font-size:18px; line-height:30px;">我们已收到您的评估表，我们会在24小时内与您取得联系。<br />您也可以直接联系我们的留学咨询顾问.<br /><font color="#FF0000" size="+2">QQ: 524817449</font></td>
+            </tr>
+            <tr><td align="right"  style="font-family:'微软雅黑'; font-size:18px; line-height:30px;" colspan="3"><a href="http://www.compassedu.hk">返回主页</a></td></tr>
+            </table>
+    	</div>
+    </div>
+<div id="Sidebar">
+      <!--侧边栏-->
+      <{include file="tpl/bigshow/left.html"}>	
+    </div>    
+<div id="Footer"><!--页面底部-->
+	<{include file="tpl/bigshow/bottom.html"}>
+</div>
+
+<!-- compassedu.hk Baidu tongji analytics -->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fd998a0e3652a82db1c29206a0a3b2e3e' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</body>
+</html>

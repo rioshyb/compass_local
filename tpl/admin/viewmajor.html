@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<{foreach from=$major item=one}>
+<title><{$one.cname_majr}></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+</HEAD>
+<BODY>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background="tpl/admin/images/title_bg1.jpg" style="PADDING-LEFT: 20px;"> <{$one.cname_majr}>  详细描述</TD></TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR>
+  <TR height=20>
+    <TD background="tpl/admin/images/shadow_bg.jpg" ></TD></TR></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background="tpl/admin/images//title_bg2.jpg" >您的相关信息</TD></TR>
+  </TABLE>
+	<table width="80%" height="122" border="1" align="center" cellPadding=0 cellSpacing=0 bordercolor="#CCCCCC" bordercolordark="">
+     <tr>
+      <td width="13%" height="30" align="center">专业中文：
+      </td>
+        <td width="87%" height="30" ><{$one.cname_majr}></td>
+    </tr>
+    <tr>
+      <td width="13%" height="30" align="center">专业英文：
+    </td>
+        <td width="87%" height="30" ><{$one.ename_majr}></td>
+    </tr>
+    <tr>
+      <td width="13%" height="30" align="center">专业大类：
+    </td>
+        <td width="87%" height="30" ><{$one.cname_cate}></td>
+    </tr>
+    <tr>
+      <td width="13%" height="30" align="center">专业小类：
+    </td>
+        <td width="87%" height="30" ><{$one.cname_clss}></td>
+    </tr>
+    <tr>
+      <td width="13%" height="30" align="center">学校名称：
+    </td>
+        <td width="87%" height="30" ><{$one.cname_univ}></td>
+    </tr>
+    <tr>
+      <td width="13%" height="30" align="center">学院名称：
+    </td>
+        <td width="87%" height="30" ><{$one.cname_schl}></td>
+    </tr>
+    <tr>
+      <td width="13%" height="30" align="center">专业排名：
+    </td>
+        <td width="87%" height="30" ><{$one.rank_majr}></td>
+    </tr>
+    <tr>
+      <td width="13%" height="30" align="center">网址链接：
+    </td>
+        <td width="87%" height="30" ><{$one.url_majr}></td>
+    </tr>
+    <tr>
+      <td width="13%" height="80" align="center">专业描述：
+    </td>
+        <td width="87%" height="80" ><{$one.desc_majr}></td>
+    </tr>
+   <{/foreach}>
+  </table>
+</BODY></HTML>

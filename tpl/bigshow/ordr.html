@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="<{$smarty.const.LOGOURL}>">
+
+    <title><{$smarty.const.WEBSITE}></title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link href="tpl/bigshow/css/custom.css" rel="stylesheet">
+
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    
+  </head>
+
+  <body class="background-public">
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <{include file="tpl/bigshow/top.html"}> 
+    </div>
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="breadcrumb breadcrumb-public">
+            <li><a href="<{spUrl c=main a=index}>">首页</a></li>
+            <li class="active"><a href="#">个人中心</a></li>
+          </ul>
+          <hr class="divider-public">
+        </div>
+      </div>
+    </div><!-- breadcrumb container -->
+
+    <div class="container">
+      <div class="row  top-mate">
+        <div class="col-md-3 col-sm-4">
+           <{include file="tpl/bigshow/user.html"}>  
+        </div><!-- col-md-3 -->
+           <{include file="tpl/bigshow/menu_xs.html"}>  
+        <div class="col-md-9 col-sm-8 top-progress-pulic">
+          <{include file="tpl/bigshow/progress.html"}>
+        </div><!-- col-md-9 -->
+
+      </div><!-- row -->  
+
+      <div class="row sidebar-bgcolor">
+        <div class="col-md-3 col-sm-4 hidden-xs public-col-nopadding">
+          <{include file="tpl/bigshow/sidebar.html"}>
+        </div><!-- col-md-3 --> 
+
+        <div class="col-md-9 col-sm-8 main-bgcolor public-col-noright">
+          <div class="menu-collapse">
+            <h3><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp我的订单</h3>
+          </div>
+
+          <div class="selection-public"> 
+            <div class="title-selection-public">订单类型</div> 
+            <ul class="nav nav-pills"> 
+            <{if $ts==1}>
+              <li class="active"><a href="<{spUrl c=main a=order ts=1}>">待付款订单</a></li> 
+            <{else}>
+              <li><a href="<{spUrl c=main a=order ts=1}>">待付款订单</a></li>
+            <{/if}>    
+    
+            <{if $ts==2}>
+                <li class="active"><a href="<{spUrl c=main a=order ts=2}>">已付款订单</a></li>
+              <{else}>
+                <li><a href="<{spUrl c=main a=order ts=2}>">已付款订单</a></li> 
+              <{/if}>   
+          
+            <{if $ts==3}>
+                <li class="active"><a href="<{spUrl c=main a=order ts=3}>">待确认订单</a></li>
+              <{else}>
+                <li><a href="<{spUrl c=main a=order ts=3}>">待确认订单</a></li> 
+              <{/if}>  
+          
+            <{if $ts==4}>
+                <li class="active"><a href="<{spUrl c=main a=order ts=4}>">已完成订单</a></li>
+              <{else}>
+                <li><a href="<{spUrl c=main a=order ts=4}>">已完成订单</a></li> 
+              <{/if}>  
+          
+            <{if $ts==5}>
+                <li  class="active"><a href="<{spUrl c=main a=order ts=5}>">退款订单</a></li> 
+              <{else}>
+                <li><a href="<{spUrl c=main a=order ts=5}>">退款订单</a></li> 
+              <{/if}>  
+            </ul> 
+          </div><!-- selection-public -->
+
+          <div class="part-mate">
+            <div class="title-part-mate">待付款订单</div>
+            <div class="part-ordr">
+            <{if $orders[0]['code_order']==""}>
+              <div class="alert alert-info">
+                <strong>提示：</strong> 您没有“待付款订单”，如查询其他订单，请在“订单类型”中选择，谢谢！
+              </div>
+            <{else}>
+            <form class="form-horizontal" role="form" name=alipayment action="alipay/alipayapi.php" method=post target="_blank">
+                    <div class="title"><h4>订单信息</h4></div>
+                    <div class="form-group"> 
+                      <label for="seller" class="col-sm-2 control-label">卖家名称：</label> 
+                      <div class="col-sm-10"> 
+                        <input type="text" class="form-control" id="seller" name="name" value="常州指南者教育咨询有限公司" readonly="true" > 
+                      </div> 
+                    </div> 
+                    <div class="form-group"> 
+                      <label for="order_no" class="col-sm-2 control-label">订编单号：</label> 
+                      <div class="col-sm-10"> 
+                        <input type="text" class="form-control" id="order_no" name="WIDout_trade_no" value="<{$orders[0]['code_order']}>" readonly="true" > 
+                      </div> 
+                    </div> 
+                    <div class="form-group"> 
+                      <label for="item" class="col-sm-2 control-label">订单名称：</label> 
+                      <div class="col-sm-10"> 
+                        <input type="text" class="form-control" id="item" name="WIDsubject" value="<{$orders[0]['item_order']}>" readonly="true" > 
+                      </div> 
+                    </div>
+                    <div class="form-group"> 
+                      <label for="desc" class="col-sm-2 control-label">订单描述：</label> 
+                      <div class="col-sm-10"> 
+                        <textarea class="form-control" readonly="true" name="WIDbody" rows="3" readonly="readonly"><{$orders[0]['desc_order']}></textarea> 
+                      </div> 
+                    </div>
+                    <div class="title"><h4>客户信息</h4></div>
+                    <div class="form-group"> 
+                      <label for="username" class="col-sm-2 control-label">客户姓名：</label> 
+                      <div class="col-sm-10"> 
+                        <input type="text" class="form-control" name="WIDreceive_name" value="<{$orders[0]['cname_cust']}>" readonly="true"> 
+                      </div> 
+                    </div> 
+                    <div class="form-group"> 
+                      <label for="tel" class="col-sm-2 control-label">手机号码：</label> 
+                      <div class="col-sm-10"> 
+                        <input type="text" class="form-control" id="tel" name="WIDreceive_mobile" value="<{$orders[0]['tel_cust']}>" readonly="true" > 
+                      </div> 
+                    </div> 
+                    <div class="form-group"> 
+                      <label for="code" class="col-sm-2 control-label">邮政编码：</label> 
+                      <div class="col-sm-10"> 
+                        <input type="text" class="form-control" id="code" name="WIDreceive_zip" value="<{$orders[0]['code_cust']}>" readonly="true" > 
+                      </div> 
+                    </div> 
+                    <div class="form-group"> 
+                      <label for="address" class="col-sm-2 control-label">联系地址：</label> 
+                      <div class="col-sm-10"> 
+                        <input type="text" class="form-control" id="address" name="WIDreceive_address" value="<{$orders[0]['address_cust']}>" readonly="true"> 
+                      </div> 
+                    </div>
+                    <div class="title"><h4>订单金额</h4></div>
+                    <div class="price-ordr">付款前请与指南者销售人员确认，谢谢！
+                      <div class="right-price-ordr">
+                        <div class="form-group">
+                          <label for="price" class="col-xs-6 public-col-nopadding control-label">付款金额：￥</label>
+                          <div class="col-xs-6 public-col-nopadding">
+                            <input type="text" class="form-control" id="price" name="WIDprice" value="<{$orders[0]['price_order']}>" readonly="true">
+                          </div>
+                          <p>
+                            <button class="btn btn-primary btn-lg" onClick="payment()">提交订单</button>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <{/if}>                   
+            </div>
+          </div>
+        </div><!-- col-md-9 -->
+      </div><!-- row -->  
+    </div>
+  
+    <!-- Modal -->
+      <div class="modal fade" id="payment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">交易提醒</h4>
+            </div>
+            <div class="modal-body">
+              <h4>请您在新打开的支付宝页面进行支付；</h4>
+              <h4>在付款完成前，请不要关闭此窗口！</h4>
+            </div>
+            <div class="modal-footer">
+              <a href="javascript:location.reload()" target="_self">
+                <button type="button" class="btn btn-default btn">付款已完成</button>
+              </a>
+              &nbsp;&nbsp;
+              <button type="button" class="btn btn-primary btn">付款遇到问题</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+
+    <footer>
+      <{include file="tpl/bigshow/bottom.html"}> 
+    </footer>
+
+   <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript">
+      function payment(){
+        $('#payment').modal({
+          backdrop: 'static'
+        })
+        document.alipayment.submit();
+      }
+    </script>
+  
+<!-- compassedu.hk Baidu tongji analytics -->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fd998a0e3652a82db1c29206a0a3b2e3e' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</body>
+</html>

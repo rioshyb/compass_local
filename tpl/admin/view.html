@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<{foreach from=$info item=one}>
+<title><{$one.title_news}></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+</HEAD>
+<BODY>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background="tpl/admin/images/title_bg1.jpg" style="PADDING-LEFT: 20px;">当前位置: </TD></TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR>
+  <TR height=20>
+    <TD background="tpl/admin/images/shadow_bg.jpg" ></TD></TR></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background="tpl/admin/images//title_bg2.jpg" >您的相关信息</TD></TR>
+  </TABLE>
+	<table width="98%" height="130">
+          <tr>
+            <td height="30" align="center" style="PADDING-LEFT: 20px;"><{$one.title_news}></td>
+          </tr>       
+          <tr>
+            <td height="21" width="98%" align="center"><{$one.time_news}></td>
+          </tr>
+          <tr>
+            <td  align="left" style="PADDING-LEFT: 20px;"><{$one.content_news}></td>
+          </tr>
+       <{/foreach}>
+   </table>
+</BODY></HTML>

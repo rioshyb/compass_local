@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+	
+	function isChn(str){
+      var reg = /^[\u4e00-\u9fa5]+$/i;
+      if(!reg.test(str)){
+       return false;
+      }
+      return true;
+	}
+
+	function isEng(str){
+      var reg = /^[A-Za-z]+$/;
+      if(!reg.test(str)){
+       return false;
+      }
+      return true;
+	}
+
+	function formchk(){
+ 		var addform=document.edit;
+ 		if (addform.cname.value==""||addform.ename.value==""||addform.code.value==""){
+  			alert("信息不能为空!");
+  			return false;   //不提交表单
+ 		}else if (isChn(addform.ename.value)==true){
+			alert("国家英文名必须为英文");
+  			addform.ename.focus();   //用户名输入框获得焦点
+  			return false;   //不提交表单	
+		}else if (isEng(addform.code.value)==false){
+			alert("英文缩写必须为英文");
+  			addform.code.focus();   //用户名输入框获得焦点
+  			return false;   //不提交表单
+		}else if (isChn(addform.cname.value)==false){
+			alert("国家中文名写必须为中文");
+  			addform.cname.focus();   //用户名输入框获得焦点
+  			return false;   //不提交表单	
+		}else{
+ 			return true;   //输入符合要求后执行表单提交操作
+		}
+	}
+	
+</script>
+</HEAD>
+<BODY >
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background=tpl/admin/images/title_bg1.jpg>当前位置: </TD></TR>
+</TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=20>
+    <TD></TD></TR>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background=tpl/admin/images/title_bg2.jpg>国家修改</TD></TR>
+  </TABLE>
+  <{foreach from=$ctry item=one}>
+<form id="edit" name="edit" method="post"  enctype="multipart/form-data"  action="<{spUrl c=super a=savec id=$one.id_ctry}>">
+  <p>&nbsp;</p>
+  <table width="45%" border="1" align="center" cellPadding=0 cellSpacing=0 bordercolor="#CCCCCC" bordercolordark="">
+ 
+    <tr>
+      <td width="32%" height="30" align="center">中文国名：
+      </td>
+        <td width="68%" height="30" ><label>
+          <input name="cname" type="text" id="cname" size="30" value="<{$one.cname_ctry}>">
+      </label></td>
+    </tr>
+    <tr>
+      <td width="32%" height="30" align="center">英文国名：
+    </td>
+        <td width="68%" height="30" ><label>
+          <input name="ename" type="text" id="ename" size="30" value="<{$one.ename_ctry}>">
+      </label></td>
+    </tr>
+    <tr>
+      <td width="32%" height="30" align="center">英文缩写：
+    </td>
+        <td width="68%" height="30" ><label>
+          <input name="code" type="text" id="code" size="30" value="<{$one.code_ctry}>">
+      </label></td>
+    </tr>
+    <tr>
+      <td width="32%" height="30" align="center">国旗图片：
+    </td>
+        <td width="68%" height="30" ><label>
+          <input name="pic" type="file" id="pic" size="15" >
+      </label></td>
+    </tr>
+  </table>
+  <{/foreach}>
+  <p align="center">&nbsp;</p>
+  <p align="center">&nbsp;&nbsp;&nbsp;
+    <input name="save" type="submit" value="保存" onClick="return formchk();">&nbsp;&nbsp;&nbsp;
+    <input name="quit" type="button" value="取消" 
+        onClick="Javascript:window.history.go(-1)">
+  </p>
+  </form>
+</BODY>
+</HTML>

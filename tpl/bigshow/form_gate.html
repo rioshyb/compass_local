@@ -1,0 +1,180 @@
+<script language="javascript">
+function chkform(form){
+      if(form.name.value=="" || form.tel.value=="" || form.mail.value==""){
+      alert("请输入姓名，邮箱和电话，谢谢 =^_^= ");
+      form.content.select();
+      return false;
+    }else if(form.name.value.indexOf(" ")!=-1 ||form.tel.value.indexOf(" ")!=-1 ||form.mail.value.indexOf(" ")!=-1){
+      alert("请不要输入空格，谢谢 =^_^= ");
+      form.content.select();
+      return false;
+    }
+    }
+function AntiSqlValid(oField ){
+  str=oField.value;
+  str=str.replace(/\'/g,"‘");//替换半角单引号为全角单引号
+  str=str.replace(/\"/g,"“");//替换半角双引号为全角双引号
+  oField.value=str;
+  return false; 
+}
+</script>
+<form id="evaluate" name="evaluate"  method="post" enctype="multipart/form-data" action="<{spUrl c=main a=msgd}>">
+      <div class="row">
+        <div class="col-md-12 form-horizontal">
+          <h4 class="pm-mate"><span class="glyphicon glyphicon-globe"></span>&nbsp申请目标</h4><br>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">申请学校</label>
+            <div class="col-sm-10">
+              <input name="appuniv" type="text" id="appuniv" class="form-control" value="<{$univ['0']['cname_univ']}>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">申请学位</label>
+            <div class="col-sm-10">
+              <select name="object" id="object" class="form-control" align="absmiddle" >
+                <option value="硕士" selected="selected">硕士</option>
+                <option value="博士">博士</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">留学区域</label>
+            <div class="col-sm-10">
+              <select name="country" id="country" class="form-control" align="absmiddle">
+                <option value="香港" selected="selected">香港</option>
+                <option value="新加坡">新加坡</option>
+                <option value="英国">英国</option>
+                <option value="美国">美国</option>              
+            </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">存款证明</label>
+            <div class="col-sm-10">
+              <select name="money" id="money" align="absmiddle" class="form-control">
+                <option value="1" selected="selected">10万RMB以下</option>
+                <option value="2">10-20万RMB</option>
+                <option value="3">20-30万RMB</option>
+                <option value="4">30万RMB以上</option>              
+              </select>
+            </div>
+          </div>
+          <br>
+        </div><!-- /.col-md-12 -->
+        <div class="col-md-12 form-horizontal">
+          <h4 class="letter2-mate"><span class="glyphicon glyphicon-user"></span>&nbsp个人信息</h4><br>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">姓名</label>
+            <div class="col-sm-10">
+              <input name="name" type="text" class="form-control" id="inputEmail3" placeholder="必填">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">性别</label>
+            <div class="col-sm-10">
+              <select  name="gender" id="gender" class="form-control" align="absmiddle">
+                <option value="1" selected="selected">男</option>
+                <option value="0">女</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">手机/座机</label>
+            <div class="col-sm-10">
+              <input name="tel" type="text" id="tel" class="form-control" placeholder="必填">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">电子邮箱</label>
+            <div class="col-sm-10">
+              <input type="email" name="mail" id="mail" class="form-control" placeholder="必填">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">QQ号码</label>
+            <div class="col-sm-10">
+              <input type="text" name="qq" type="text" id="qq" id="mail" class="form-control" placeholder="必填">
+            </div>
+          </div>
+          <br>
+        </div><!-- /.col-md-12 -->
+        
+        <div class="col-md-12 form-horizontal">
+          <h4 class="cv-mate"><span class="glyphicon glyphicon-book"></span>&nbsp教育背景</h4><br>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">毕业学校</label>
+            <div class="col-sm-10">
+              <input name="university" type="text" id="university" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">所在院系</label>
+            <div class="col-sm-10">
+              <input name="school" type="text" id="school" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">所学专业</label>
+            <div class="col-sm-10">
+              <input name="major" type="text" id="major" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">平均成绩</label>
+            <div class="col-sm-10">
+              <input name="gpa" type="text" id="gpa" class="form-control" placeholder="100分制">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">入学年份</label>
+            <div class="col-sm-10">
+              <input name="admdate" type="text" id="admdate" class="form-control">
+            </div>
+          </div>
+          <br>
+        </div><!-- /.col-md-12 -->
+
+        <div class="col-md-12 form-horizontal">
+          <h4 class="ps-mate"><span class="glyphicon glyphicon-globe"></span>&nbsp英语成绩</h4><br>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">英语四级</label>
+            <div class="col-sm-10">
+              <input name="cet4" type="text" id="cet4" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">英语六级</label>
+            <div class="col-sm-10">
+              <input name="cet6" type="text" id="cet6" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">雅思/托福</label>
+            <div class="col-sm-10">
+              <input name="it" type="text" id="it" class="form-control" placeholder="如有">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">GRE/GMAT</label>
+            <div class="col-sm-10">
+              <input name="et" type="text" id="et" class="form-control" placeholder="如有">
+            </div>
+          </div>
+          <br>
+        </div><!-- /.col-md-12 -->
+
+        <div class="col-md-12 form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">补充信息</label>
+            <div class="col-sm-10">
+              <textarea id="content" name="content" class="form-control" rows="5"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" onClick="return chkform(evaluate)" class="btn btn-primary btn-lg">提交评估表</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.row -->
+      </form>

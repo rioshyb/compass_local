@@ -1,0 +1,65 @@
+          <h5 class="title-progress-pulic"><span class="glyphicon glyphicon-calendar"></span>&nbsp申请进度</h5>
+          <div class="progress-pulic">
+            <div class="circle-progress-pulic">1</div>
+            <h5 class="step-progress-pulic">签约 <span class="glyphicon glyphicon-chevron-right arrow-progress-public"></span></h5>
+          </div>
+
+          <div class="progress-pulic">
+          <{if $smarty.session.custominfo.step_cust < 2}>  
+            <div class="circle-progress-pulic nostartc-progress-pulic">2</div>
+            <h5 class="step-progress-pulic nostarts-progress-pulic">前期费用 <span class="glyphicon glyphicon-chevron-right arrow-progress-public"></span></h5>
+          <{else}>
+            <div class="circle-progress-pulic">2</div>
+            <h5 class="step-progress-pulic">前期费用 <span class="glyphicon glyphicon-chevron-right arrow-progress-public"></span></h5>
+          <{/if}>    
+          </div>
+
+          <div class="progress-pulic">
+            <{if $smarty.session.custominfo.step_cust < 3}>
+            <div class="circle-progress-pulic nostartc-progress-pulic">3</div>
+            <h5 class="step-progress-pulic nostarts-progress-pulic">材料准备 <span class="glyphicon glyphicon-chevron-right arrow-progress-public"></span></h5>
+          <{else}>
+            <div class="circle-progress-pulic">3</div>
+            <h5 class="step-progress-pulic">材料准备 <span class="glyphicon glyphicon-chevron-right arrow-progress-public"></span></h5>
+          <{/if}> 
+          </div>
+
+          <div class="progress-pulic">
+          <{if $smarty.session.custominfo.step_cust < 4}>
+            <div class="circle-progress-pulic nostartc-progress-pulic">4</div>
+            <h5 class="step-progress-pulic nostarts-progress-pulic">中期费用 <span class="glyphicon glyphicon-chevron-right arrow-progress-public"></span></h5>
+          <{else}>
+            <div class="circle-progress-pulic">4</div>
+            <h5 class="step-progress-pulic">中期费用 <span class="glyphicon glyphicon-chevron-right arrow-progress-public"></span></h5>
+          <{/if}> 
+          </div>
+
+          <div class="progress-pulic">
+          <{if $smarty.session.custominfo.step_cust < 5}>
+            <div class="circle-progress-pulic nostartc-progress-pulic">5</div>
+            <h5 class="step-progress-pulic nostarts-progress-pulic">学校申请 <span class="glyphicon glyphicon-chevron-right arrow-progress-public"></span></h5>
+          <{else}>
+            <div class="circle-progress-pulic">5</div>
+            <h5 class="step-progress-pulic">学校申请 <span class="glyphicon glyphicon-chevron-right arrow-progress-public"></span></h5>
+          <{/if}> 
+          </div>
+
+          <div class="progress-pulic">
+          <{if $smarty.session.custominfo.step_cust < 6}>
+            <div class="circle-progress-pulic nostartc-progress-pulic">6</div>
+            <h5 class="step-progress-pulic nostarts-progress-pulic">后期费用 <span class="glyphicon glyphicon-chevron-right arrow-progress-public"></span></h5>
+          <{else}>
+            <div class="circle-progress-pulic">6</div>
+            <h5 class="step-progress-pulic">后期费用 <span class="glyphicon glyphicon-chevron-right arrow-progress-public"></span></h5>
+          <{/if}>
+          </div>
+
+          <div class="progress-pulic">
+          <{if $smarty.session.custominfo.step_cust < 7}>
+            <div class="circle-progress-pulic nostartc-progress-pulic">7</div>
+            <h5 class="step-progress-pulic nostarts-progress-pulic">申请结果</h5>
+          <{else}>
+            <div class="circle-progress-pulic">7</div>
+            <h5 class="step-progress-pulic">申请结果</h5>
+          <{/if}>  
+          </div>

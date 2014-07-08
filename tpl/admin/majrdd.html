@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="tpl/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ // 当页面加载完毕的时候
+	// 根据国家返回学校列表
+	$("#country").change(function(){ // “提交”按钮被点击
+		// 构造发送的数据，请注意如果获取表单各项的值
+		var country = $('#country').val();
+		// 用$.post发送数据
+		$.get('<{spUrl c=myax a=univ}>', 'ctry='+country, function(result){
+			$('#school').empty();													   
+			$('#university').empty().append(result); 
+		});
+	});
+	
+	// 根据学校返回学院列表
+	$("#university").change(function(){ // “提交”按钮被点击
+		// 构造发送的数据，请注意如果获取表单各项的值
+		var university = $('#university').val();
+		// 用$.post发送数据
+		$.get('<{spUrl c=myax a=schl}>', 'univ='+university, function(result){
+			$('#school').empty().append(result); 
+		});
+	});
+	
+	// 根据专业大类返回专业小类列表
+	$("#category").change(function(){ // “提交”按钮被点击
+		// 构造发送的数据，请注意如果获取表单各项的值
+		var category = $('#category').val();
+		// 用$.post发送数据
+		$.get('<{spUrl c=myax a=clss}>', 'cate='+category, function(result){
+			$('#classes').empty().append(result);
+		});
+	});
+});
+</script>
+<script type="text/javascript">
+	function formchk(){
+ 		var addform=document.edit;
+ 		if (addform.cname.value==""||addform.ename.value==""||addform.university.value==""||addform.school.value==""||addform.classes.value==""){
+  			alert("信息不能为空!");
+  			return false;   //不提交表单
+ 		}else if (isChn(addform.ename.value)==true){
+			alert("国家英文名必须为英文");
+  			addform.ename.focus();   //用户名输入框获得焦点
+  			return false;   //不提交表单	
+		}else if (isEng(addform.cname.value)==true){
+			alert("国家中文名写必须为中文");
+  			addform.cname.focus();   //用户名输入框获得焦点
+  			return false;   //不提交表单	
+		}else{
+ 			return true;   //输入符合要求后执行表单提交操作
+		}
+	}
+	
+	function isChn(str){
+      var reg = /^[\u4e00-\u9fa5]+$/i;
+      if(!reg.test(str)){
+       return false;
+      }
+      return true;
+	}
+
+	function isEng(str){
+      var reg =/^[a-zA-Z]+ [a-zA-Z]+$/;
+      if(!reg.test(str)){
+       return false;
+      }
+      return true;
+	}
+</script>
+
+</HEAD>
+<BODY >
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background=tpl/admin/images/title_bg1.jpg>当前位置: </TD></TR>
+</TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=20>
+    <TD></TD></TR>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background=tpl/admin/images/title_bg2.jpg>学校新增</TD></TR>
+  </TABLE>  
+<form id="edit" name="edit" method="post"  action="<{spUrl c=admin a=postr}>">
+  <p>&nbsp;</p>
+  <table width="80%" height="257" border="1" align="center" cellpadding=0 cellspacing=0 bordercolor="#CCCCCC" bordercolordark="">
+    <tr>
+      <td width="20%" height="30" align="center">国家名称： </td>
+      <td width="15%" height="30" ><label>
+        <select name="country" id="country">
+         <{foreach from=$country item=one}>
+          	<option value="<{$one.id_ctry}>"><{$one.cname_ctry}></option>
+		 <{/foreach}>
+        </select>
+      </label></td>
+      <td width="10%" height="30" align="center">学校名称： </td>
+      <td width="20%" height="30" ><label>
+        <select name="university" id="university">
+        </select>
+      </label></td>
+      <td width="15%" height="30" align="center">学院： </td>
+      <td width="20%" height="30" ><label>
+        <select name="school" id="school">
+        </select>
+      </label></td>
+    </tr>
+    <tr>
+      <td width="15%" height="30" align="center">专业中文： </td>
+      <td height="30" colspan="5"><label>
+        <input name="cname" type="text" id="cname" size="70" >
+      </label></td>
+    </tr>
+    <tr>
+      <td width="15%" height="30" align="center">专业英文： </td>
+      <td height="30"  colspan="5"><input name="ename" type="text" id="ename" size="70" ></td>
+    </tr>
+    <tr>
+    	<td width="15%" height="30" align="center">专业大类： </td>
+      <td width="6%" height="30" ><label>
+        <select name="category" id="category">
+       	  <{foreach from=$category item=one}>
+          	<option value="<{$one.id_cate}>"><{$one.cname_cate}></option>
+		  <{/foreach}>
+        </select>
+      </label></td>
+      <td width="16%" height="30" align="center">专业小类： </td>
+      <td height="30"  colspan="3"><label>
+        <select name="classes" id="classes">
+        </select>
+      </label></td>
+    </tr>
+    <tr>
+      <td width="15%" height="30" align="center">专业排名： </td>
+      <td height="30"  colspan="5"><label>
+        <input name="rank" type="text" id="rank" size="70">
+      </label></td>
+    </tr>
+    <tr>
+      <td width="15%" height="30" align="center">专业链接： </td>
+      <td height="30"  colspan="5"><input name="url" type="text" id="url" size="70" ></td>
+    </tr>
+    <tr>
+      <td width="15%" height="90" align="center">学校简介： 
+      </td>
+      <td colspan="5"><textarea name="desc" cols="70" rows="6" id="desc"></textarea></td>
+    </tr>
+  </table>
+  <p align="center">&nbsp;</p>
+  <p align="center">&nbsp;&nbsp;&nbsp;
+    <input name="save" type="submit" value="保存" onClick="return formchk();">&nbsp;&nbsp;&nbsp;
+    <input name="quit" type="button" value="取消" 
+        onClick="Javascript:window.history.go(-1)">
+  </p>
+  </form>
+</BODY>
+</HTML>

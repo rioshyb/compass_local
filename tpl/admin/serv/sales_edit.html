@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+	function formchk(){
+ 		var addform=document.edit;
+ 		if (addform.cname.value==""||addform.name.value==""||addform.email.value==""){
+  			alert("信息不能为空!");
+  			return false;   //不提交表单
+ 		}
+	}
+	
+	function isChn(str){
+      var reg = /^[\u4e00-\u9fa5]+$/i;
+      if(!reg.test(str)){
+       return false;
+      }
+      return true;
+	}
+
+	function isEng(str){
+      var reg =/^[a-zA-Z]+ [a-zA-Z]+$/;
+      if(!reg.test(str)){
+       return false;
+      }
+      return true;
+	}
+</script>
+</HEAD>
+<BODY >
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background=tpl/admin/images/title_bg1.jpg>当前位置: <{$position}></TD></TR>
+</TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=20>
+    <TD></TD></TR>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background=tpl/admin/images/title_bg2.jpg>销售人员信息修改</TD></TR>
+  </TABLE>  
+<form id="edit" name="edit" method="post"  enctype="multipart/form-data"  action="<{spUrl c=serv a=saves id=$id}>">
+  <p>&nbsp;</p>
+  <table width="48%" height="122" border="1" align="center" cellPadding=0 cellSpacing=0 bordercolor="#CCCCCC" bordercolordark="">
+  <{foreach from=$sales item=one}>
+    <tr>
+      <td width="27%" height="30" align="center">用户名：
+      </td>
+        <td width="73%" height="30" ><label>
+          <input name="name" type="text" id="name" size="35" value="<{$one.name_user}>" >
+      </label></td>
+    </tr>
+    <tr>
+      <td width="27%" height="30" align="center">姓名：
+    </td>
+        <td width="73%" height="30" ><label>
+          <input name="cname" type="text" id="cname" size="35" value="<{$one.cname_user}>" >
+      </label></td>
+    </tr>
+     <tr>
+      <td width="27%" height="30" align="center">电子邮箱：
+    </td>
+        <td width="73%" height="30" ><label>
+          <input name="email" type="text" id="email" size="35" value="<{$one.email_user}>" >
+      </label></td>
+    </tr>
+   <{/foreach}>
+  </table>
+  <p align="center">&nbsp;</p>
+  <p align="center">&nbsp;&nbsp;&nbsp;
+    <input name="save" type="submit" value="保存" onClick="return formchk();">&nbsp;&nbsp;&nbsp;
+    <input name="quit" type="button" value="取消" 
+        onClick="Javascript:window.history.go(-1)">
+  </p>
+  </form>
+</BODY>
+</HTML>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="<{$smarty.const.LOGOURL}>">
+
+    <title><{$smarty.const.WEBSITE}></title>
+
+   <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link href="tpl/bigshow/css/custom.css" rel="stylesheet">
+
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <script src="tpl/bigshow/js/fancyzoom/FancyZoom.js" language="JavaScript" type="text/javascript"></script>
+    <script src="tpl/bigshow/js/fancyzoom/FancyZoomHTML.js" language="JavaScript" type="text/javascript"></script>
+  </head>
+
+  <body onLoad="setupZoom();">
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <{include file="tpl/bigshow/top.html"}> 
+    </div>
+
+    <div class="row banner-service">
+      <div class="container">
+        <div class="col-lg-12">
+          <h3 class="title-grey-index color-succ">为您提供最好的留学服务</h3>
+          <p class="subtitle-grey-index color-succ">标准化的服务流程，只需8步实现您的留学梦想</p>
+        </div>
+      </div><!-- /.container -->   
+    </div><!-- / .row-->
+
+     <div class="container white-serv">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="intro-white-serv">
+            <h3 class="title-index">前期咨询</h3>
+            <p class="subtitle-index">我们建立了完善的线上线下咨询平台，您可以通过我们的网站进行咨询，我们会解答您提出的关于留学申请中的各方面问题，根据您的背景和要求，提供选校建议和成功率评估，最终与您确定留学申请方案。</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <a href="tpl/bigshow/img/consult.jpg" title="前期咨询">
+          <img class="img-responsive" src="tpl/bigshow/img//consult.png" alt="Generic placeholder image"></a>
+        </div>
+      </div><!-- /.row -->
+    </div><!-- /container white-serv -->
+    <div class="container white-serv">
+      <div class="row">
+        <div class="col-md-6 col-md-push-6">
+          <div class="intro-white-serv">
+            <h3 class="title-index">签约注册</h3>
+            <p class="subtitle-index">签订合同后，我们会为您开通申请进度查询账号，您可以凭账号登陆到我们网站的客户系统中，进行费用支付，材料进度查询，申请进度查询等功能。</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-md-pull-6">
+          <a href="tpl/bigshow/img/contract.jpg" title="签约注册">
+          <img class="img-responsive" src="tpl/bigshow/img/contract.png" alt="Generic placeholder image"></a>
+        </div>
+      </div><!-- /.row -->
+    </div><!-- /container white-serv -->
+
+
+    <div class="container white-serv">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="intro-white-serv">
+            <h3 class="title-index">前期费用</h3>
+            <p class="subtitle-index">我们的费用是分段收取的，签订合同后您只需要完成前期费用的支付，我们就会开始帮您准备申请材料了。在客户系统中，您可以直观的看到您的订单信息，点击付款后跳转到支付宝官方网站进行付款，交易类型为担保交易，申请期间的所有费用均由支付宝保管。
+            <br><a href="<{spUrl c=main a=alip}>" target="_blank">如何使用支付宝付费</a>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <a href="tpl/bigshow/img/cost1.jpg" title="前期费用">
+          <img class="img-responsive" src="tpl/bigshow/img/cost1.png" alt="Generic placeholder image"></a>
+        </div>
+      </div><!-- /.row -->
+    </div><!-- /container white-serv -->
+
+     <div class="container white-serv">
+      <div class="row">
+        <div class="col-md-6 col-md-push-6">
+          <div class="intro-white-serv">
+            <h3 class="title-index">材料清单</h3>
+            <p class="subtitle-index">前期费用支付后，您可以通过客户系统中的材料清单页面查看您所有的申请材料准备的准备进度。</p>
+          </div>
+        </div> 
+        <div class="col-md-6 col-md-pull-6">
+          <a href="tpl/bigshow/img/mate.jpg" title="材料清单">
+            <img class="img-responsive" src="tpl/bigshow/img/mate.png" alt="Generic placeholder image">
+          </a>
+        </div>
+        
+      </div><!-- /.row -->
+    </div><!-- /container white-serv -->
+
+    <div class="container white-serv">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="intro-white-serv">
+            <h3 class="title-index">中期费用</h3>
+            <p class="subtitle-index">申请材料准备完毕后，系统会生成中期费用的订单，和前期费用是一样的支付流程，付款完成后可以在我的订单页面查看到目前的订单信息。</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <a href="tpl/bigshow/img/cost2.jpg" title="中期费用">
+            <img class="img-responsive" src="tpl/bigshow/img/cost2.png" alt="Generic placeholder image">
+          </a>
+        </div> 
+      </div><!-- /.row -->
+    </div><!-- /container white-serv -->
+
+    <div class="container white-serv">
+      <div class="row">
+        <div class="col-md-6 col-md-push-6">
+          <div class="intro-white-serv">
+            <h3 class="title-index">学校申请</h3>
+            <p class="subtitle-index">中期费用支付后，我们会及时的为您提交申请所需材料，完成申请的流程。您可以通过客户系统中的学校申请页面查看您所有的申请进度，申请账号密码和申请结果。</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-md-pull-6">
+          <a href="tpl/bigshow/img/apply.jpg" title="学校申请">
+            <img class="img-responsive" src="tpl/bigshow/img/apply.png" alt="Generic placeholder image">
+          </a>
+        </div> 
+      </div><!-- /.row -->
+    </div><!-- /container white-serv -->
+
+    <div class="container white-serv">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="intro-white-serv">
+            <h3 class="title-index">后期费用</h3>
+            <p class="subtitle-index">所有学校的申请流程均完成后，系统会生成后期费用的订单，仍然是支付宝担保交易流程，付款完成后可以在我的订单页面查询到目前所有的订单信息。</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <a href="tpl/bigshow/img/cost3.jpg" title="后期费用">
+            <img class="img-responsive" src="tpl/bigshow/img/cost3.png" alt="Generic placeholder image">
+          </a>
+        </div> 
+      </div><!-- /.row -->
+    </div><!-- /container white-serv -->
+
+    <div class="container white-serv">
+      <div class="row">
+        <div class="col-md-6 col-md-push-6">
+          <div class="intro-white-serv">
+            <h3 class="title-index">申请结果</h3>
+            <p class="subtitle-index">您无需反复登录各个学校的网站查询申请结果，在我们的客户系统中就可以一目了然的掌握您各个学校的申请结果了，您也可以通过关注我们的微信公众平台，更方便更快捷的查看到申请结果。</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-md-pull-6">
+          <a href="tpl/bigshow/img/result.jpg" title="申请结果">
+            <img class="img-responsive" src="tpl/bigshow/img/result.png" alt="Generic placeholder image">
+          </a>
+        </div> 
+      </div><!-- /.row -->
+    </div><!-- /container white-serv -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js">
+    </script>
+    <footer>
+      <{geturl}>
+    </footer>
+  
+<!-- compassedu.hk Baidu tongji analytics -->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fd998a0e3652a82db1c29206a0a3b2e3e' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</body>
+</html>

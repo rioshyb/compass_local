@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<{foreach from=$university item=univ}>
+<title><{$univ.cname_univ}></title>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+</HEAD>
+<BODY >
+
+  <table width="460" border="0" align="center" cellPadding=0 cellSpacing=0 >
+ 
+    <tr>
+      <td height="30" align="left"><b><font size="+"><{$univ.cname_univ}></font></b></td>        
+    </tr>
+    <tr>
+      <td align="center"><img style="max-width:460px;width:expression(this.width > 460 ? 460: true);height:auto;" src="<{$univ.logo_univ}>"/></td> 
+    </tr>
+    <tr>
+      <td align="left"><b>学校简介：</b><{$univ.desc_univ|replace:"font-size:9.0pt":"font-size:12.0pt"}></td>
+    </tr>
+    <tr>
+      <td height="30"></td>
+    </tr>
+    
+     <{foreach from=$school item=schl}>
+        <tr>
+          <td align="left" height="25"><b><{$schl.ename_schl}>（<{$schl.cname_schl}>）</b></td>
+        </tr>
+        <tr><td height="2"> <hr /></td></tr>
+         <{foreach from=$major item=majr}>
+          	<{if $majr.schl_majr==$schl.id_schl}>
+          		<tr>
+                	<td>
+                    <{$majr.ename_majr}> <font color="#FF0000"><strong> <{$majr.cname_majr}> </strong></font><{$majr.desc_majr}> 
+                    </td>
+                </tr>
+                <tr>    
+                    <td><a href="<{$majr.url_majr}>" target="_blank"><{$majr.url_majr}></a>
+                    </td>
+                </tr>
+          	<{/if}>  
+		  <{/foreach}>
+        <tr>
+        	<td height="20"></td>
+        </tr>
+        <{/foreach}>
+  </table>
+  <{/foreach}>
+</BODY>
+</HTML>

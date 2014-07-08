@@ -1,0 +1,95 @@
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">登录指南者教育</h4>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal" role="form" method="post" action="<{spUrl c=main a=login}>">
+              <div class="row modal-login">    
+                <div class="input-group col-sm-8 col-sm-offset-2">
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                  <input type="text" class="form-control" name="uname" id="uname" placeholder="请输入账号">
+                </div>
+                <br>
+                <div class="input-group col-sm-8 col-sm-offset-2">
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                  <input type="password" name="upass" class="form-control" id="upass" placeholder="请输入密码">
+                </div>
+                <br>
+              </div>              
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary btn-lg">&nbsp&nbsp&nbsp登 录&nbsp&nbsp&nbsp</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="tpl/bigshow/img/logo.png"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="<{spUrl c=main a=index}>">首页</a></li>
+            <li><a href="<{spUrl c=main a=service}>">服务</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">经验分享 <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="<{spUrl c=main a=newsp}>">留学资讯</a></li>
+                <li><a href="<{spUrl c=main a=succp}>">成功案例</a></li>
+                <li><a href="<{spUrl c=main a=status}>">海外生活</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">院校库 <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="<{spUrl c=main a=univ cy=11}>">学校库</a></li>
+                <li><a href="<{spUrl c=main a=clss cs=1}>">专业库</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">联系我们<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="<{spUrl c=main a=msgn}>">在线评估</a></li>
+                <li><a href="<{spUrl c=main a=about}>">关于我们</a></li>
+              </ul>
+            </li>
+          </ul>
+          <{if $smarty.session.custominfo.name_cust =="" }>
+            <div class="navbar-right navbar-login"> 
+              <button data-toggle="modal" data-target="#myModal" data-backdrop="static" class="btn btn-default">登陆</button> 
+            </div>
+          <{else}>
+            <ul class="nav navbar-nav navbar-right">
+              <li><img src="tpl/bigshow/img/jake.png" class="img-circle avatar-navbar"></li>
+              <li id="fat-menu" class="dropdown">
+                <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><{$smarty.session.custominfo.cname_cust}><b class="caret"></b></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="<{spUrl c=main a=order ts=1}>">个人中心</a></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="<{spUrl c=main a=logout}>">退出登录</a></li>
+                </ul>
+              </li>
+            </ul>
+            <{/if}>
+            <form class="navbar-form navbar-right hidden-sm" method="post" action="<{spUrl c=query a=succs}>" role="form">
+              <div class="form-group">
+                <input name="kwds" type="text" placeholder="输入搜索内容" class="form-control search-input">
+                <button type="submit" class="btn btn-primary search-btn"><span class="glyphicon glyphicon-search"></span></button>
+              </div>
+            </form>
+        </div><!--/.navbar-collapse -->
+      </div><!--/.container -->
+

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+	function checkPass(){
+  		var pwd1=document.getElementById("npass").value;
+  		var pwd2=document.getElementById("rpass").value;
+ 		if(pwd1!=pwd2){
+    		document.getElementById("errorpwd").style.display = "block";
+    		return false;
+ 		}else{
+			document.getElementById("errorpwd").style.display = "none";
+			return true;
+		}
+	}
+	
+	function formchk(){
+ 		var addform=document.edit;
+ 		if (addform.name.value=="" ||addform.cname.value==""){
+  			alert("用户名和姓名不能为空!");
+  			addform.name.focus();   //用户名输入框获得焦点
+  			return false;   //不提交表单
+ 		}else if (addform.npass.value==""||addform.rpass.value==""){
+			alert("密码不能为空!");
+  			addform.npass.focus();   //用户名输入框获得焦点
+  			return false;   //不提交表单	
+		}else if (addform.npass.value!=addform.rpass.value){
+			alert("两次输入密码不同!");
+  			addform.npass.focus();   //用户名输入框获得焦点
+  			return false;   //不提交表单	
+		}else{
+ 			return true;   //输入符合要求后执行表单提交操作
+		}
+	}
+</script>
+</HEAD>
+<BODY >
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background=tpl/admin/images/title_bg1.jpg>当前位置: <{$position}></TD></TR>
+</TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=20>
+    <TD></TD></TR>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background=tpl/admin/images/title_bg2.jpg>销售人员新增</TD></TR>
+  </TABLE>  
+<form id="edit" name="edit" method="post"  enctype="multipart/form-data"  action="<{spUrl c=serv a=adds}>">
+  <p>&nbsp;</p>
+  <table width="48%" height="122" border="1" align="center" cellPadding=0 cellSpacing=0 bordercolor="#CCCCCC" bordercolordark="">
+    <tr>
+      <td width="27%" height="30" align="center">用户名：
+      </td>
+        <td width="73%" height="30" ><label>
+          <input name="name" type="text" id="name" size="35" >
+      </label></td>
+    </tr>
+    <tr>
+      <td width="27%" height="30" align="center">姓名：
+    </td>
+        <td width="73%" height="30" ><label>
+          <input name="cname" type="text" id="cname" size="35" >
+      </label></td>
+    </tr>
+     <tr>
+      <td width="27%" height="30" align="center">电子邮箱：
+    </td>
+        <td width="73%" height="30" ><label>
+          <input name="email" type="text" id="email" size="35" >
+      </label></td>
+    </tr>
+    <tr>
+      <td width="27%" height="30" align="center">输入密码：
+    </td>
+        <td width="73%" height="30" ><label>
+          <input name="npass" type="password" id="npass" size="35" onChange="return checkPass();" >
+      </label></td>
+    </tr>
+    <tr>
+      <td width="27%" height="30" align="center">再次输入：
+    </td>
+        <td width="73%" height="30" ><label>
+          <input name="rpass" type="password" id="rpass" size="35" onChange="return checkPass();">
+      </label><span id="errorpwd" style="display:none;"><font color="#FF0000">两次输入密码不一致</font></span></td>
+    </tr>
+  </table>
+  <p align="center">&nbsp;</p>
+  <p align="center">&nbsp;&nbsp;&nbsp;
+    <input name="save" type="submit" value="保存" onClick="return formchk();">&nbsp;&nbsp;&nbsp;
+    <input name="quit" type="button" value="取消" 
+        onClick="Javascript:window.history.go(-1)">
+  </p>
+  </form>
+</BODY>
+</HTML>

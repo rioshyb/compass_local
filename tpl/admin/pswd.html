@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+<script charset="utf-8" src="tpl/include/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="tpl/include//kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+	function checkPass(){
+  		var pwd1=document.getElementById("npass").value;
+  		var pwd2=document.getElementById("rpass").value;
+ 		if(pwd1!=pwd2){
+    		document.getElementById("errorpwd").style.display = "block";
+    		return false;
+ 		}else{
+			document.getElementById("errorpwd").style.display = "none";
+			return true;
+		}
+	}
+	
+	function formchk(){
+ 		var addform=document.edit;
+ 		if (addform.opass.value==""){
+  			alert("原始密码不能为空!");
+  			addform.opass.focus();   //用户名输入框获得焦点
+  			return false;   //不提交表单
+ 		}else if (addform.npass.value==""||addform.rpass.value==""){
+			alert("新密码不能为空!");
+  			addform.npass.focus();   //用户名输入框获得焦点
+  			return false;   //不提交表单	
+		}else if (addform.npass.value!=addform.rpass.value){
+			alert("两次输入密码不同!");
+  			addform.npass.focus();   //用户名输入框获得焦点
+  			return false;   //不提交表单	
+		}else{
+ 			return true;   //输入符合要求后执行表单提交操作
+		}
+	}
+</script>
+</HEAD>
+<BODY>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background=tpl/admin/images/title_bg1.jpg>当前位置: </TD></TR>
+  </TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=20>
+    <TD></TD></TR>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background=tpl/admin/images/title_bg2.jpg>密码修改</TD></TR>
+  </TABLE>
+  <form id="edit" name="edit" method="post" action="<{spUrl c=admin a=pwsde  
+            name=$smarty.session.userinfo.name_user}>" onSubmit="return formchk();">
+  <table cellSpacing=0 cellPadding=0 width="100%">
+    <tr>
+    	<td width="3%" height="37">
+        </td>
+        <td width="30%" height="37" align="right">用 户 名：
+        </td>
+        <td width="67%" height="37" ><{$smarty.session.userinfo.name_user}></td>
+    </tr>
+    <tr>
+    	<td height="37" >
+        </td>
+    	<td height="37"  align="right">原 密 码：
+        </td>
+        <td width="67%" height="37" ><input name="opass" type="password" id="opass" size="20" ></td>
+    </tr>
+    <tr>
+    	<td height="31" >
+        </td>
+    	<td height="31"  align="right">新 密 码：
+      </td>
+      <td width="67%" height="31" ><input name="npass" type="password" id="npass" size="20" 
+      onChange="return checkPass();"></td>
+    </tr>
+    <tr>
+    	<td height="35" >
+        </td>
+    	<td height="35"  align="right">再次输入：
+      </td>
+      <td width="67%" height="35" ><input name="rpass" type="password" id="rpass" size="20" 
+      onChange="return checkPass();">
+      <span id="errorpwd" style="display:none;"><font color="#FF0000">两次输入密码不一致</font></span>
+      </td>
+    </tr>
+      <tr>
+    	<td width="3%" height="40" ></td>
+        <td width="30%" height="40" ></td>
+        <td width="67%" height="40" valign="bottom">&nbsp;&nbsp;&nbsp;
+        <input name="save" type="submit" value="保存" onChange="return checkPass();">&nbsp;&nbsp;&nbsp;
+        <input name="quit" type="button" value="取消" 
+        onClick="Javascript:window.history.go(-1)"></td>
+    </tr>
+  </table>
+ </form>
+ </BODY>
+</HTML>   

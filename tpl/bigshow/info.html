@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="<{$smarty.const.LOGOURL}>">
+
+    <title><{$smarty.const.WEBSITE}></title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link href="tpl/bigshow/css/custom.css" rel="stylesheet">
+
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    
+  </head>
+
+  <body class="background-public">
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <{include file="tpl/bigshow/top.html"}> 
+    </div>
+
+    <div class="row banner-info">
+      <div class="container">
+        <div class="col-lg-12">
+          <h2>NEWS</h2>
+          <p>帮您获取一手留学信息</p>
+        </div>
+      </div><!-- /container univ-index -->
+    </div><!-- /.row -->   
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="breadcrumb breadcrumb-public">
+            <li><a href="<{spUrl c=main a=index}>">首页</a></li>
+            <li class="active">留学资讯</li>
+          </ul>
+          <hr class="divider-public">
+        </div>
+      </div>
+    </div><!-- breadcrumb container -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="selection-public">
+            <div class="title-selection-public">国家地区</div>
+            <ul class="nav nav-pills">
+              <{foreach from=$list item=ctrys}>
+                <{if $ctrys.id_ctry==$cy}>
+                  <li class="active"><a href="<{spUrl c=main a=newsp cy=$ctrys.id_ctry}>"><{$ctrys.cname_ctry}></a></li>
+                <{else}>
+                  <li><a href="<{spUrl c=main a=newsp cy=$ctrys.id_ctry}>"><{$ctrys.cname_ctry}></a></li>
+                <{/if}>         
+               <{/foreach}>
+            </ul>
+          </div><!-- selection-public --> 
+
+          <div class="container-public">
+            <{foreach from=$results item=one}>
+              <div class="list-info">
+                <div class="img-list-info hidden-xs">
+                  <a href="<{spUrl c=main a=newst 
+            id=$one.id_news page=$pager.current_page}>" target="_blank">
+                    <img src = "<{$smarty.const.DM_NEWS}><{$one.avatar_news}>" class="img-responsive">
+                  </a>
+                </div>
+                <div class="content-list-info">
+                  <a href="<{spUrl c=main a=newst 
+            id=$one.id_news page=$pager.current_page}>" target="_blank">
+                    <h3 class="title-list-info"><{$one.title_news}></h3>
+                    <h5 class="time-list-publict">指南者&nbsp<{$one.time_news|strip_tags|truncate:10:"":true}></h5>
+                    <p><{$one.content_news|strip_tags|truncate:120:"":true}></p>
+                      <{assign var=tags value = $one.keywords_news|explode:","}>
+                    <p>
+                  </a> 
+                  <!--  <script type="text/javascript">
+
+                      var tag ="<{$one.keywords_news}>";
+                      var tags =  tag.split(",");
+                      for (var i in tags){
+                          document.write("<span class=\"label label-default\">"+ tags[i] +"</span>&nbsp" );
+                      }
+                    </script>-->
+                  </p>
+                </div>
+              </div><!-- list-info -->
+            <{/foreach}>
+
+            <ul class="pagination pagination-pulbic">  
+              <{if $pager}>
+                <{if $pager.current_page != $pager.first_page}>
+                  <li><a href="<{spUrl c=main a=newsp cy=$cy page=$pager.prev_page}>">&laquo;</a></li>
+                <{else}>
+                  <li class="disabled"><a href="#">&laquo;</a></li>
+                <{/if}>
+                <!--开始循环页码，同时如果循环到当前页则不显示链接-->
+                <{foreach from=$pager.all_pages item=thepage}>
+                  <{if $thepage >= $curpage and $thepage <= $curpage+10 }>
+                    <{if $thepage != $pager.current_page}>
+                      <li><a href="<{spUrl c=main a=newsp cy=$cy  page=$thepage}>"><{$thepage}></a></li>
+                    <{else}>
+                      <li class="active"><span><{$thepage}><span class="sr-only">(current)</span></span></li>
+                    <{/if}>
+                  <{/if}>  
+                <{/foreach}>
+                <!--在当前页不是最后一页的时候，显示下一页和后页-->
+                <{if $pager.current_page != $pager.last_page}>
+                  <li><a href="<{spUrl c=main a=newsp cy=$cy page=$pager.next_page}>">»</a></li>
+                <{else}>
+                  <li><a class="disabled" href="#">»</a></li>
+                <{/if}>
+              <{/if}>
+            </ul>
+
+          </div><!-- container-public -->
+        </div><!-- col-md-9 -->
+
+        <{include file="tpl/bigshow/side.html"}>
+      </div><!-- row -->  
+    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js">
+    </script>
+    <!--移动代码到js后面防止js失效-->
+     <footer>
+      <{geturl}>
+    </footer>
+  
+<!-- compassedu.hk Baidu tongji analytics -->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fd998a0e3652a82db1c29206a0a3b2e3e' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</body>
+</html>

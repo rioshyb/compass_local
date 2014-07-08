@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<title>评估表信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+</HEAD>
+<BODY>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background="tpl/admin/images/title_bg1.jpg" style="PADDING-LEFT: 20px;">当前位置: </TD></TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR>
+  <TR height=20>
+    <TD background="tpl/admin/images/shadow_bg.jpg" ></TD></TR></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background="tpl/admin/images//title_bg2.jpg" >您的相关信息</TD></TR>
+    <tr><td height="20"></td></tr>
+  </TABLE>
+<{foreach from=$info item=one}>
+   <table width="90%" align="center" border="1px" cellspacing="0px" bordercolor="#CCCCCC">
+        <tr><td colspan="2" height="20px" bgcolor="#CCCCCC" ><b>个人信息</b></td></tr>
+        <tr>
+        	<td width="25%" align="right">姓名：</td><td width="75%"><{$one.name_msge}></td>
+        </tr>
+        <tr>
+        	<td width="25%" align="right">性别：</td>
+            <{if $one.gender_msge=="0"}>
+            	<td >女</td>
+            <{else}>
+                <td>男</td>
+            <{/if}>
+        </tr>
+        <tr>
+        	<td width="25%" align="right">QQ：</td>
+       	   <td><{$one.qq_msge}></td>
+        </tr>
+         <tr>
+        	<td width="25%" align="right">手机/座机：</td>
+       	   <td><{$one.tel_msge}></td>
+        </tr> 
+        <tr>
+        	<td width="25%" align="right">电子邮箱：</td><td><{$one.mail_msge}></td>
+        </tr> 
+          <tr>
+        	<td width="25%" align="right">入学年份：</td>
+        	<td><{$one.adm_msge}></td>
+        <tr><td colspan="2" height="20px" bgcolor="#CCCCCC" ><b>教育背景</b></td></tr>
+        <tr>
+        	<td width="25%" align="right">毕业学校：</td><td><{$one.univ_msge}></td>
+        </tr>
+         <tr>
+        	<td width="25%" align="right">所在院系：</td><td><{$one.schl_msge}></td>
+        </tr>
+        <tr>
+        	<td width="25%" align="right">所学专业：</td><td><{$one.majr_msge}></td>
+        </tr>
+         <tr>
+        	<td width="25%" align="right">平均成绩GPA：</td><td><{$one.gpa_msge}></td>
+        </tr>
+        <tr><td colspan="2" height="20px" bgcolor="#CCCCCC" ><b>英语成绩</b></td></tr>
+         <tr>
+        	<td width="25%" align="right">大学英语四级：</td><td><{$one.cet4_msge}></td>
+        </tr>
+        <tr>
+        	<td width="25%" align="right">大学英语六级：</td><td><{$one.cet6_msge}></td>
+        </tr>
+        <tr>
+        	<td width="25%" align="right">雅思/托福：</td><td><{$one.it_msge}></td>
+        </tr>
+        <tr>
+        	<td width="25%" align="right">GRE/GMAT：</td><td><{$one.et_msge}></td>
+        </tr>
+        <tr><td colspan="2" height="20px" bgcolor="#CCCCCC" ><b>申请目标</b></td></tr>
+         <tr>
+        	<td width="25%" align="right">申请目的：</td><td><{$one.obj_msge}></td>
+        </tr>
+         <tr>
+        	<td width="25%" align="right">申请学校：</td><td><{$one.apyuniv_msge}></td>
+        </tr>
+         <tr>
+        	<td width="25%" align="right">申请专业：</td><td><{$one.apymajor_msge}></td>
+        </tr>
+        <tr>
+        	<td width="25%" align="right">留学区域：</td><td><{$one.ctry_msge}></td>
+        </tr>
+        <tr>
+        	<td width="25%" align="right">留学动机：</td><td><{$one.purp_msge}></td>
+        </tr>
+        <tr>
+        	<td width="25%" align="right">可提供存款证明：</td>
+            	<{if $one.money_msge=="1"}>
+            		<td>10万RMB以下</td>
+            	<{elseif $one.money_msge=="2"}>
+                	<td>10-20万RMB</td>
+                <{elseif $one.money_msge=="3"}>
+                	<td>20-30万RMB</td>
+                <{else}>
+                	<td>30万RMB以上</td>
+            	<{/if}>
+        </tr>
+        <tr>
+        	<td width="25%" align="right">补充信息：</td><td><{$one.content_msge}></td>
+        </tr>
+        <tr>
+        	<td width="25%" align="right">留言时间：</td><td><{$one.time_msge}></td>
+        </tr>
+        <tr>
+        	<td width="25%" align="right">发送时间：</td><td><{$one.send_msge}></td>
+        </tr>
+        <tr>
+        	<td width="25%" align="right">接收对象：</td><td><{$one.recer_msge}></td>
+        </tr>
+	</table>
+<{/foreach}>
+</BODY></HTML>

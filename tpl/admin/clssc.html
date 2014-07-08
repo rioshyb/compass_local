@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+</HEAD><script language="javascript">
+	function is_confirm(msg)
+	{
+		if(confirm(msg)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+</script>
+<BODY>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background="tpl/admin/images/title_bg1.jpg">当前位置: <font color='#0000CC'><{$position}></font></TD></TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR>
+  <TR height=20>
+    <TD background="tpl/admin/images/shadow_bg.jpg" ></TD></TR></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background="tpl/admin/images//title_bg2.jpg" ><{$position}>列表</TD></TR>
+  </TABLE>  
+<table width="95%" align="center">
+	<tr>
+    	<td height="35" width="11%" align="right">专业大类：
+        </td>
+        <td height="35" width="89%" align="left">
+        	<{foreach from=$category item=one}>
+				<a href="<{spUrl c=admin a=clss cs=$one.id_cate}>" ><{$one.cname_cate}></a>&nbsp;&nbsp;
+			<{/foreach}>
+        </td>
+	</tr>
+</table>
+<table width="80%" align="center" border="1px" cellspacing="0px" bordercolor="#CCCCCC">
+	  <tr bgcolor="#97D6FF">
+            <td height="25" width="25%" align="center">专业中文名</td>
+            <td height="25" width="30%" align="center">专业英文名</td>
+            <td height="25" width="20%" align="center">专业大类</td>
+            <td height="25" width="25%" align="center">操作</td>
+        </tr> 
+</table> 
+</BODY></HTML>

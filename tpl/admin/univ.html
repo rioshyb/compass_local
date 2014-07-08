@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+</HEAD><script language="javascript">
+	function is_confirm(msg)
+	{
+		if(confirm(msg)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+</script>
+<BODY>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background="tpl/admin/images/title_bg1.jpg">当前位置: <font color='#0000CC'><{$position}></font></TD></TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR>
+  <TR height=20>
+    <TD background="tpl/admin/images/shadow_bg.jpg" ></TD></TR></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background="tpl/admin/images//title_bg2.jpg" ><{$position}>列表</TD></TR>
+  </TABLE>  
+<form  name="form" action="<{spUrl c=admin a=univ}>" method="post">
+<table width="95%" align="center">
+	<tr>
+    	<td height="35" width="8%" align="right">国家分类：
+        </td>
+        <td height="35" width="24%" align="left">
+        <select name="cy" id="cy">
+        	<{foreach from=$country item=one}>
+				<{if $one.id_ctry==$ctry}>
+            		<option value="<{$one.id_ctry}>"><{$one.cname_ctry}></option>
+                <{/if}>
+			<{/foreach}>
+            <{foreach from=$country item=one}>
+				<{if $one.id_ctry!=$ctry}>
+            		<option value="<{$one.id_ctry}>"><{$one.cname_ctry}></option>
+                <{/if}>
+			<{/foreach}>
+        </select>    
+        </td>
+        <td height="35" width="12%" align="right">学校名称：
+        </td>
+        <td height="35" width="39%" align="left"><input type="text" name="univ" id="univ" width="100%" value="<{$univ}>" />
+        <td height="35" width="12%" align="left"><input type="submit" name="button" id="button" value="查询" />
+        </td>
+        <td width="5%"></td>
+	</tr>
+</table>
+</form>
+<table width="95%" align="center" cellspacing="1px" >
+	  <tr bgcolor="#97D6FF">
+            <td height="25" width="16%" align="center">学校中文名</td>
+            <td height="25" width="50%" align="center">学校英文名</td>
+            <td height="25" width="10%" align="center">所属国家</td>
+            <td height="25" width="24%" align="center">操作</td>
+        </tr> 
+</table>
+<table class="univs" width="95%" align="center" cellspacing="1px" >
+          <{foreach from=$university item=one}>
+          <tr>
+            <td height="20" width="18%" align="center">&nbsp;&nbsp;<{$one.cname_univ}></td>
+            <td height="20" width="45%" align="center"><{$one.ename_univ}></td>
+            <td height="20" width="15%" align="center"><{$one.ctry_univ}></td>
+            <td height="20" width="22%" align="center">
+            <a target="_blank" href="<{spUrl c=admin a=down id=$one.id_univ}>" >导出</a>/ <a href="<{spUrl c=admin a=univadd}>" >新增</a>/ 
+            <a href="<{spUrl c=super a=editu id=$one.id_univ}>" >修改</a>/ <a href="<{spUrl c=super a=delu id=$one.id_univ}>" 
+            	onclick="return is_confirm('确认要删除吗?');">删除</a>&nbsp;&nbsp;</td>
+       </tr> 
+       <{/foreach}>
+</table> 
+	<table  width="90%" align="center" >
+          <tr>
+            <td height="40" align="right" colspan="4"><{if $pager}>
+              共有<{$pager.total_count}>条，共有<{$pager.total_page}>页（每页<{$pager.page_size}>条）：
+              <!--在当前页不是第一页的时候，显示前页和上一页-->
+              <{if $pager.current_page != $pager.first_page}> 
+              <a href="<{spUrl c=admin a=univ cy=$ctry univ=$univ page=$pager.first_page}>">前页 </a> | 
+              <a href="<{spUrl c=admin a=univ cy=$ctry univ=$univ page=$pager.prev_page}>">上一页</a> | 
+              <{/if}>
+              <!--开始循环页码，同时如果循环到当前页则不显示链接-->
+              <{foreach from=$pager.all_pages item=thepage}>
+              <{if $thepage != $pager.current_page}> 
+              <a href="<{spUrl c=admin a=univ cy=$ctry univ=$univ page=$thepage}>"><{$thepage}> </a> 
+              <{else}> <b><{$thepage}></b> <{/if}>
+              <{/foreach}>
+              <!--在当前页不是最后一页的时候，显示下一页和后页-->
+              <{if $pager.current_page != $pager.last_page}> | 
+              <a href="<{spUrl c=admin a=univ cy=$ctry univ=$univ page=$pager.next_page}>">下一页</a> | 
+              <a href="<{spUrl c=admin a=univ cy=$ctry univ=$univ page=$pager.last_page}>">后页</a> <{/if}>
+              <{/if}> </td>
+          </tr>
+        </table>
+</BODY></HTML>

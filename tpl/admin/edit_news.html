@@ -1,0 +1,241 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+<script charset="utf-8" src="tpl/include/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="tpl/include//kindeditor/lang/zh_CN.js"></script>
+<script charset="utf-8" src="tpl/js/My97DatePicker/WdatePicker.js"></script>
+<script charset="utf-8" src="tpl/admin/js/Validator.js"></script>
+<script type="text/javascript" src="tpl/admin/js/jquery-1.4.2.min.js"></script>
+
+<script type="text/javascript">
+		var editor;
+		KindEditor.ready(function(K) {
+			editor = K.create('textarea[name="content"]', {
+				allowFileManager : true
+			});
+		});		
+
+
+		//当改版资讯类型时 切换是否要显示学校和专业选择
+		function changetype(){
+
+			var type = $("#type").val();
+			//留学资讯，成功案例，录取通知，在新增修改时，增加“学校”, “专业小类字段
+			if(type=="info" || type=="succ" || type=="acpt"){
+				$("#trschool,#trmajor").show();
+				$("#university,#classes").attr("disabled",false);
+			}else{
+				$("#trschool,#trmajor").hide();	
+				$("#university,#classes").attr("disabled",true);
+			}
+		
+		}
+
+		//替换关键字中的中文逗号
+		function  keywords_rp(Obj){
+		   var  str = Obj.value.replace(/，/g,',');
+				Obj.value=str;
+		}
+
+
+		$(document).ready(function(){ // 当页面加载完毕的时候
+
+
+			// 根据国家返回学校列表
+			$("#country").change(function(){ // “提交”按钮被点击
+				// 构造发送的数据，请注意如果获取表单各项的值
+				var country = $('#country').val();
+				// 用$.post发送数据
+				$.get('<{spUrl c=myax a=univ}>', 'ctry='+country, function(result){
+					$('#school').empty();													   
+					$('#university').empty().append(result); 
+				});
+			});
+			
+			// 根据学校返回学院列表
+			$("#university").change(function(){ // “提交”按钮被点击
+				// 构造发送的数据，请注意如果获取表单各项的值
+				var university = $('#university').val();
+				// 用$.post发送数据
+				$.get('<{spUrl c=myax a=schl}>', 'univ='+university, function(result){
+					$('#school').empty().append(result); 
+				});
+			});
+			
+			// 根据专业大类返回专业小类列表
+			$("#category").change(function(){ // “提交”按钮被点击
+				// 构造发送的数据，请注意如果获取表单各项的值
+				var category = $('#category').val();
+				// 用$.post发送数据
+				$.get('<{spUrl c=myax a=clss}>', 'cate='+category, function(result){
+					$('#classes').empty().append(result);
+				});
+			});
+		});
+
+		function formchk(){
+ 		var addform=document.edit;
+ 		if (addform.university.value==""||addform.classes.value==""){
+  			alert("信息不能为空!");
+  			return false;   //不提交表单
+		}else{
+ 			return true;   //输入符合要求后执行表单提交操作
+		}
+	}
+</script>
+</HEAD>
+<BODY onLoad="changetype()">
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background=tpl/admin/images/title_bg1.jpg>当前位置: </TD></TR>
+  </TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=20>
+    <TD></TD></TR>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background=tpl/admin/images/title_bg2.jpg>信息修改</TD></TR>
+  </TABLE>
+  <form id="edit" name="edit" method="post" enctype="multipart/form-data" action="<{spUrl c=super a=saven id=$id page=$page}>" onSubmit="return Validator.Validate(this,3);">
+  <table cellSpacing=0 cellPadding=0 width="90%" align="center">
+  	<{foreach from=$info item=one}>
+    <tr>
+        <td width="10%" height="47"  align="center">资讯标题：</td>
+        <td width="87%" height="47"  colspan="3">
+			<label>
+			  <input name="title" type="text" id="title" size="90%" value="<{$one.title_news}>" require="true" dataType="LimitB"  min="2" msg="请输入资讯标题" >
+			</label>
+		</td>
+    </tr>
+
+    <tr>
+        <td width="8%" height="47"  align="center">显示添加时间： </td>
+        <td width="89%" height="47" colspan="3">
+			<label>
+          <input name="showtime" type="text" id="showtime"  onclick="WdatePicker()" require="true" dataType="Date" msg="请输入日期,格式：yyyy-MM-dd" size="20" value="<{$one.time_news}>">
+			</label>
+		</td>
+    </tr>
+
+	<tr>
+        <td width="8%" height="47" align="center" >关键字：</td>
+        <td width="89%" height="47"  colspan="3">
+			<label>
+			  <input name="keywords" type="text" id="keywords" size="90%" onKeyUp="keywords_rp(this)" onBlur="keywords_rp(this)" value="<{$one.keywords_news}>">
+			</label>
+			<br/>
+			多关键字之间请用英文状态下的逗号分隔
+		</td>
+    </tr>
+
+
+    <tr>
+        <td width="10%" height="47"  align="center">资讯类型：</td>
+        <td width="87%" height="47" colspan="3" >
+			<select name="type" id="type" dataType="Require"  msg="请选择资讯类型" onChange="changetype()">
+            	<option value="info" selected>-留学资讯-</option>
+        </select>
+		</td>
+    </tr>
+
+    <tr id="trschool">
+      <td width="20%" height="30" align="center">国家名称： </td>
+      <td width="15%" height="30" >
+        <select name="country" id="country">
+          <{foreach from=$country item=crty}>
+          	<{if $crty.id_ctry!=$ctry_univ}>
+          		<option value="<{$crty.id_ctry}>"><{$crty.cname_ctry}></option>
+          	<{else}>
+          		<option value="<{$crty.id_ctry}>" selected><{$crty.cname_ctry}></option>
+          	<{/if}>  
+		  <{/foreach}>
+
+        </select>
+	  </td>
+
+      <td width="10%" height="30" align="center">学校名称： </td>
+      <td width="20%" height="30" ><label>
+        <select name="university" id="university">
+            <{foreach from=$university item=univ}>
+          	<{if $univ.id_univ!=$id_univ}>
+          		<option value="<{$univ.id_univ}>"><{$univ.cname_univ}></option>
+          	<{else}>
+          		<option value="<{$univ.id_univ}>" selected><{$univ.cname_univ}></option>
+          	<{/if}>  
+		  <{/foreach}>
+        </select>
+      </label>
+	  </td>
+    </tr>
+
+    <tr id="trmajor">
+    	<td width="15%" height="30" align="center">专业大类： </td>
+		<td width="6%" height="30" >
+			<select name="category" id="category">
+			  <{foreach from=$category item=cate}>
+			   <{if $cate.id_cate!=$cate_clss}>
+				<option value="<{$cate.id_cate}>"><{$cate.cname_cate}></option>
+          		<{else}>
+				<option value="<{$cate.id_cate}>" selected><{$cate.cname_cate}></option>
+			   <{/if}>
+			  <{/foreach}>
+			</select>
+		</td>
+		<td width="16%" height="30" align="center">专业小类： </td>
+		<td height="30"  colspan="3">
+			<select name="classes" id="classes">
+			<option value="<{$majr.id_clss}>"><{$majr.cname_clss}></option>
+			<{foreach from=$classes item=clss}>
+				<{if $clss.id_clss!=$id_clss}>
+					<option value="<{$clss.id_clss}>"><{$clss.cname_clss}></option>
+          		<{else}>
+					<option value="<{$clss.id_clss}>" selected><{$clss.cname_clss}></option>
+				<{/if}>  
+			  <{/foreach}>
+			</select>
+		</td>
+    </tr>
+
+    <tr>
+    	<td height="200"  align="center">资讯内容：</td>
+        <td width="87%" height="200"  colspan="3">
+			<label>
+			  <textarea name="content" id="content" cols="90%" rows="20" ><{$one.content_news}></textarea>
+			</label>
+		</td>
+    </tr>
+
+    <tr>
+    	<td height="60" align="center">缩略图（仅资讯）：</td>
+        <td width="87%" height="60" colspan="3" >
+		<label>
+          <input name="avatar" id="avatar" type="file" size="60" >
+        </label></td>
+    </tr>
+    <tr>
+    	<td height="60" align="center" colspan="3">缩略图推荐分辨率320px*200px</td>
+    </tr>
+
+    <tr>
+    	<td height="60" align="center">正文大图（仅资讯）：</td>
+        <td width="87%" height="60" colspan="3" >
+		<label>
+          <input name="pic" id="pic" type="file" ize="60" >
+        </label></td>
+    </tr>
+	<tr>
+    	<td height="60" align="center" colspan="3">大图推荐分辨率900px*300px</td>
+    </tr>
+	<tr>
+        <td width="10%" height="40" ></td>
+        <td width="87%" height="40" valign="bottom" colspan="3">&nbsp;&nbsp;&nbsp;
+        <input name="save" type="submit" value="保存" onClick="return formchk();">&nbsp;&nbsp;&nbsp;
+        <input name="quit" type="button" value="取消" 
+        onClick="Javascript:window.history.go(-1)"></td>
+    </tr>
+    <{/foreach}> 
+  </table>
+  </form>
+ </BODY>
+</HTML>   

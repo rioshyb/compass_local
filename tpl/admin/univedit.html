@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="tpl/admin/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript">
+	function formchk(){
+ 		var addform=document.edit;
+ 		if (addform.cname.value==""||addform.ename.value==""||addform.py.value==""){
+  			alert("信息不能为空!");
+  			return false;   //不提交表单
+ 		}else if (isChn(addform.ename.value)==true){
+			alert("国家英文名必须为英文");
+  			addform.ename.focus();   //用户名输入框获得焦点
+  			return false;   //不提交表单	
+		}else if (isChn(addform.cname.value)==false){
+			alert("国家中文名写必须为中文");
+  			addform.cname.focus();   //用户名输入框获得焦点
+  			return false;   //不提交表单	
+		}else{
+ 			return true;   //输入符合要求后执行表单提交操作
+		}
+	}
+	
+	function isChn(str){
+      var reg = /^[\u4e00-\u9fa5]+$/i;
+      if(!reg.test(str)){
+       return false;
+      }
+      return true;
+	}
+
+	function isEng(str){
+      var reg =/^[a-zA-Z]+ [a-zA-Z]+$/;
+      if(!reg.test(str)){
+       return false;
+      }
+      return true;
+	}
+  //替换关键字中的中文逗号
+    function  keywords_rp(Obj){
+       var  str = Obj.value.replace(/，/g,',');
+        Obj.value=str;
+    }
+</script>
+<script charset="utf-8" src="tpl/include/kindeditor/kindeditor-min.js"></script>
+	<script charset="utf-8" src="tpl/include//kindeditor/lang/zh_CN.js"></script>
+	<script type="text/javascript">
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="desc"]', {
+					allowFileManager : true
+				});
+			});		
+	</script>
+</HEAD>
+<BODY >
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background=tpl/admin/images/title_bg1.jpg>当前位置: </TD></TR>
+</TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=20>
+    <TD></TD></TR>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background=tpl/admin/images/title_bg2.jpg>学校新增</TD></TR>
+  </TABLE>  
+<{foreach from=$university item=one}>
+<form id="edit" name="edit" method="post"  enctype="multipart/form-data"  action="<{spUrl c=super a=saveu id=$one.id_univ}>">
+  <p>&nbsp;</p>
+  <table width="70%" height="257" border="1" align="center" cellPadding=0 cellSpacing=0 bordercolor="#CCCCCC" bordercolordark="">
+ 
+    <tr>
+      <td width="16%" height="30" align="center">学校中文：
+      </td>
+        <td width="84%" height="30" ><label>
+          <input name="cname" type="text" id="cname" size="70" value="<{$one.cname_univ}>">
+      </label></td>
+    </tr>
+    <tr>
+      <td width="16%" height="30" align="center">学校英文：
+    </td>
+        <td width="84%" height="30" ><label>
+          <input name="ename" type="text" id="ename" size="70" value="<{$one.ename_univ}>">
+      </label></td>
+    </tr>
+    <tr>
+      <td width="16%" height="30" align="center">学校拼音：
+    </td>
+        <td width="84%" height="30" ><label>
+          <input name="py" type="text" id="py" size="70"  value="<{$one.py_univ}>">
+      </label></td>
+    </tr>
+    <tr>
+        <td width="16%" height="30" align="center">关键字：</td>
+        <td width="84%" height="30" >
+      <label>
+        <input name="keywords" type="text" id="keywords" size="70" value="<{$one.kws_univ}>" onKeyUp="keywords_rp(this)" onBlur="keywords_rp(this)">
+      </label>
+      <br/>
+      多关键字之间请用英文状态下的逗号分隔
+    </td>
+    </tr>
+
+    <tr>
+      <td width="16%" height="30" align="center">学术水平：
+    </td>
+        <td width="84%" height="30" ><label>
+          <select name="acad_univ" id="acad_univ">
+				<!--option value="">-请选择-</option-->
+			  <{foreach from=$arrcount item=countitem}>
+				<{if $one.acad_univ==$countitem}>
+					<option value="<{$countitem}>" selected><{$countitem}></option>
+				<{else}>
+					<option value="<{$countitem}>"><{$countitem}></option>
+				<{/if}>
+			  <{/foreach}>
+          </select>
+        </label></td>
+    </tr>
+
+    <tr>
+      <td width="16%" height="30" align="center">校园环境：
+    </td>
+        <td width="84%" height="30" ><label>
+          <select name="env_univ" id="env_univ">
+			<!--option value="">-请选择-</option-->
+			  <{foreach from=$arrcount item=countitem}>
+				<{if $one.env_univ==$countitem}>
+					<option value="<{$countitem}>" selected><{$countitem}></option>
+				<{else}>
+					<option value="<{$countitem}>"><{$countitem}></option>
+				<{/if}>
+			  <{/foreach}>
+          </select>
+        </label></td>
+    </tr>
+
+
+    <tr>
+      <td width="16%" height="30" align="center">消费水平：
+    </td>
+        <td width="84%" height="30" ><label>
+          <select name="cons_univ" id="cons_univ">
+			<!--option value="">-请选择-</option-->
+			  <{foreach from=$arrcount item=countitem}>
+				<{if $one.cons_univ==$countitem}>
+					<option value="<{$countitem}>" selected><{$countitem}></option>
+				<{else}>
+					<option value="<{$countitem}>"><{$countitem}></option>
+				<{/if}>
+			  <{/foreach}>
+          </select>
+        </label></td>
+    </tr>
+
+
+    <tr>
+      <td width="16%" height="30" align="center">就业前景：
+    </td>
+        <td width="84%" height="30" ><label>
+          <select name="job_univ" id="job_univ">
+			<!--option value="">-请选择-</option-->
+			  <{foreach from=$arrcount item=countitem}>
+				<{if $one.job_univ==$countitem}>
+					<option value="<{$countitem}>" selected><{$countitem}></option>
+				<{else}>
+					<option value="<{$countitem}>"><{$countitem}></option>
+				<{/if}>
+			  <{/foreach}>
+          </select>
+        </label></td>
+    </tr>
+
+
+
+    <tr>
+      <td width="16%" height="30" align="center">申请难度：
+    </td>
+        <td width="84%" height="30" ><label>
+          <select name="easy_univ" id="easy_univ">
+			<!--option value="">-请选择-</option-->
+			  <{foreach from=$arrcount item=countitem}>
+				<{if $one.easy_univ==$countitem}>
+					<option value="<{$countitem}>" selected><{$countitem}></option>
+				<{else}>
+					<option value="<{$countitem}>"><{$countitem}></option>
+				<{/if}>
+			  <{/foreach}>
+          </select>
+        </label></td>
+    </tr>
+
+
+
+
+    <tr>
+      <td width="16%" height="30" align="center">分析评价：
+    </td>
+        <td width="84%" height="30" >
+			<label>
+				<textarea name="eval_univ" id="eval_univ" rows="3" cols="70"><{$one.eval_univ}></textarea>
+			</label></td>
+    </tr>
+
+
+    <tr>
+      <td width="16%" height="30" align="center">所属国家：
+    </td>
+        <td width="84%" height="30" ><label>
+          <select name="country" id="country">
+          
+          <{foreach from=$country item=crty}>
+          <{if $one.ctry_univ==$crty.id_ctry}>
+          	<option value="<{$crty.id_ctry}>"><{$crty.cname_ctry}></option>
+          <{/if}>  
+		  <{/foreach}>
+           <{foreach from=$country item=crty}>
+          <{if $one.ctry_univ!=$crty.id_ctry}>
+          	<option value="<{$crty.id_ctry}>"><{$crty.cname_ctry}></option>
+          <{/if}>  
+		  <{/foreach}>
+          </select>
+        </label></td>
+    </tr>
+    <tr>
+      <td width="16%" height="30" align="center">学校图片：
+    </td>
+        <td width="84%" height="30" ><label>
+          <input name="pic" type="file" id="pic" size="60" >
+      </label></td>
+    </tr>
+    <tr>
+      <td width="16%" height="30" align="center">学校排名：
+    </td>
+        <td width="84%" height="30" ><input name="rank" type="text" size="70"
+         value="<{$one.rank_univ}>"></td>
+    </tr>
+    <tr>
+      <td width="16%" height="90" align="center">学校简介：
+    </td>
+      <td width="84%" ><textarea name="desc" cols="70" rows="20" id="desc" ><{$one.desc_univ}></textarea></td>
+    </tr>
+  </table>
+  <{/foreach}>
+
+  <p align="center">&nbsp;</p>
+  <p align="center">&nbsp;&nbsp;&nbsp;
+    <input name="save" type="submit" value="保存" onClick="return formchk();">&nbsp;&nbsp;&nbsp;
+    <input name="quit" type="button" value="取消" 
+        onclick="window.location='<{spUrl c=admin a=univc}>'" >
+  </p>
+  </form>
+</BODY>
+</HTML>

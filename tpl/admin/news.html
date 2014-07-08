@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+</HEAD><script language="javascript">
+	function is_confirm(msg)
+	{
+		if(confirm(msg)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+</script>
+<BODY>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background="tpl/admin/images/title_bg1.jpg">当前位置: <font color='#0000CC'><{$position}></font></TD></TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR>
+  <TR height=20>
+    <TD background="tpl/admin/images/shadow_bg.jpg" ></TD></TR></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background="tpl/admin/images//title_bg2.jpg" ><{$position}>列表</TD></TR>
+  </TABLE>
+<table width="98%">
+          <{foreach from=$results item=one}>
+          <tr>
+            <td style="PADDING-LEFT: 20px;" height="30" width="55%" align="left">&nbsp;&nbsp;<{$one.title_news}></td>
+            <td height="30" width="25%" align="center"><{$one.time_news}></td>
+            <td height="30" width="20%" align="right"><a href="<{spUrl c=admin a=view 
+            id=$one.id_news page=$pager.current_page}>" target="_blank">查看</a>/<a href="<{spUrl c=super a=editn 
+            id=$one.id_news page=$pager.current_page}>" >修改</a>/
+            <a href="<{spUrl c=super a=del id=$one.id_news page=$pager.current_page}>" 
+            	onclick="return is_confirm('确认要删除吗?');">删除</a>&nbsp;&nbsp;</td>
+          </tr> 
+          <{/foreach}>
+          <tr>
+            <td height="40" width="98%" align="right" colspan="3"><{if $pager}>
+              共有<{$pager.total_count}>条，共有<{$pager.total_page}>页（每页<{$pager.page_size}>条）：
+              <!--在当前页不是第一页的时候，显示前页和上一页-->
+              <{if $pager.current_page != $pager.first_page}> 
+              <a href="<{spUrl c=admin a=news page=$pager.first_page}>">前页 </a> | 
+              <a href="<{spUrl c=admin a=news page=$pager.prev_page}>">上一页</a> | 
+              <{/if}>
+              <!--开始循环页码，同时如果循环到当前页则不显示链接-->
+              <{foreach from=$pager.all_pages item=thepage}>
+              <{if $thepage != $pager.current_page}> 
+              <a href="<{spUrl c=admin a=news page=$thepage}>"><{$thepage}> </a> <{else}> <b><{$thepage}></b> <{/if}>
+              <{/foreach}>
+              <!--在当前页不是最后一页的时候，显示下一页和后页-->
+              <{if $pager.current_page != $pager.last_page}> | 
+              <a href="<{spUrl c=admin a=news page=$pager.next_page}>">下一页</a> | 
+              <a href="<{spUrl c=admin a=news page=$pager.last_page}>">后页</a> <{/if}>
+              <{/if}> </td>
+          </tr>
+        </table>
+</BODY></HTML>

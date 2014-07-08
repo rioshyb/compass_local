@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+</HEAD><script language="javascript">
+	function is_confirm(msg)
+	{
+		if(confirm(msg)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+</script>
+<BODY>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD width="68%" background="tpl/admin/images/title_bg1.jpg">当前位置：<font color='#0000CC'><{$position}></font>&nbsp;&nbsp;&nbsp;&nbsp;客户账号：<font color='#0000CC'><{$custom[0]['name_cust']}></font>&nbsp;&nbsp;&nbsp;&nbsp;客户姓名：<font color='#0000CC'><{$custom[0]['cname_cust']}></font></td></TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR>
+  <TR height=20>
+    <TD background="tpl/admin/images/shadow_bg.jpg" ></TD></TR></TABLE>
+<table width="100%">
+  <tr>
+  	<td width="7%" height="30"></td>
+  	<td width="22%">
+    &nbsp;&nbsp;&nbsp;&nbsp;<a href="<{spUrl c=sales a=order id=$id ts=2}>">付费管理</a></td>
+    <td width="22%" >&nbsp;&nbsp;&nbsp;&nbsp;<a href="<{spUrl c=sales a=mate id=$id}>">材料明细</a></td>
+    <td width="24%" >&nbsp;&nbsp;&nbsp;&nbsp;<a href="<{spUrl c=sales a=aply id=$id}>">申请进度</a></td>
+    <td width="25%" >&nbsp;&nbsp;&nbsp;&nbsp;<a href="<{spUrl c=sales a=tour id=$id}>">行程准备</a></td> 
+  </tr>  
+</table>    
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background="tpl/admin/images//title_bg2.jpg" ><{$position}></TD></TR>
+    <{if $mate[0]['recd1_mate']=="定稿" && $mate[0]['recd2_mate']=="定稿" && $mate[0]['cv_mate']=="定稿" && $mate[0]['ps_mate']=="定稿" && $mate[0]['aply_mate']=="定稿"}>
+    	<tr><td height="30" >&nbsp;&nbsp;&nbsp;&nbsp;<font size="+1" color="#FF0000">此客户该缴纳中期费用，请生成订单，谢谢！</font></td></tr>
+    <{/if}>    
+</TABLE>
+<br />
+<form name="form" action="<{spUrl c=sales a=mates id=$id}>" method="post">
+<table width="55%" align="center" cellspacing="0px" border="1" bordercolor="#EBEBEB">
+          <tr>
+            <td bgcolor="#97D6FF" height="25" width="15%" align="center"><b>推荐信1</b></td>
+            <td><select disabled="disabled" name="recd1">
+            	<{if $mate[0]['recd1_mate']=="客户初稿准备中"}>
+            		<option value="客户初稿准备中" selected="selected">客户初稿准备中</option>
+                <{else}>
+              		<option value="客户初稿准备中">客户初稿准备中</option>
+              	<{/if}>
+                
+                <{if $mate[0]['recd1_mate']=="已收到客户初稿，尚未反馈客户意见"}>    
+                    <option value="已收到客户初稿，尚未反馈客户意见" selected="selected">已收到客户初稿，尚未反馈客户意见</option>
+                <{else}>
+                	<option value="已收到客户初稿，尚未反馈客户意见">已收到客户初稿，尚未反馈客户意见</option>
+                <{/if}>
+                
+                <{if $mate[0]['recd1_mate']=="初稿定稿，英文稿准备中"}>  
+                    <option value="初稿定稿，英文稿准备中" selected="selected">初稿定稿，英文稿准备中</option>
+                <{else}>
+                	<option value="初稿定稿，英文稿准备中" >初稿定稿，英文稿准备中</option>
+                <{/if}> 
+                
+                <{if $mate[0]['recd1_mate']=="完成英文稿，已发客户确认中"}>  
+                    <option value="完成英文稿，已发客户确认中" selected="selected">完成英文稿，已发客户确认中</option>
+                <{else}>
+                	<option value="完成英文稿，已发客户确认中" >完成英文稿，已发客户确认中</option>
+                <{/if}> 
+                
+                <{if $mate[0]['recd1_mate']=="客户反馈英文稿意见，英文稿修改中"}>  
+                    <option value="客户反馈英文稿意见，英文稿修改中" selected="selected">客户反馈英文稿意见，英文稿修改中</option>
+                <{else}>
+                	<option value="客户反馈英文稿意见，英文稿修改中" >客户反馈英文稿意见，英文稿修改中</option>
+                <{/if}> 
+                
+                <{if $mate[0]['recd1_mate']=="定稿"}>
+                    <option value="定稿" selected="selected">定稿</option>
+                <{else}>    
+                    <option value="定稿">定稿</option>
+                <{/if}> 
+ 
+                </select></td>
+          </tr>  
+          <tr>
+            <td bgcolor="#97D6FF" height="25" width="16%" align="center"><b>推荐信2</b></td>
+            <td><select disabled="disabled" name="recd2">
+            	<{if $mate[0]['recd2_mate']=="客户初稿准备中"}>
+            		<option value="客户初稿准备中" selected="selected">客户初稿准备中</option>
+                <{else}>
+              		<option value="客户初稿准备中">客户初稿准备中</option>
+              	<{/if}>
+                
+                <{if $mate[0]['recd2_mate']=="已收到客户初稿，尚未反馈客户意见"}>    
+                    <option value="已收到客户初稿，尚未反馈客户意见" selected="selected">已收到客户初稿，尚未反馈客户意见</option>
+                <{else}>
+                	<option value="已收到客户初稿，尚未反馈客户意见">已收到客户初稿，尚未反馈客户意见</option>
+                <{/if}>
+                
+                <{if $mate[0]['recd2_mate']=="初稿定稿，英文稿准备中"}>  
+                    <option value="初稿定稿，英文稿准备中" selected="selected">初稿定稿，英文稿准备中</option>
+                <{else}>
+                	<option value="初稿定稿，英文稿准备中" >初稿定稿，英文稿准备中</option>
+                <{/if}> 
+                
+                <{if $mate[0]['recd2_mate']=="完成英文稿，已发客户确认中"}>  
+                    <option value="完成英文稿，已发客户确认中" selected="selected">完成英文稿，已发客户确认中</option>
+                <{else}>
+                	<option value="完成英文稿，已发客户确认中" >完成英文稿，已发客户确认中</option>
+                <{/if}> 
+                
+                <{if $mate[0]['recd2_mate']=="客户反馈英文稿意见，英文稿修改中"}>  
+                    <option value="客户反馈英文稿意见，英文稿修改中" selected="selected">客户反馈英文稿意见，英文稿修改中</option>
+                <{else}>
+                	<option value="客户反馈英文稿意见，英文稿修改中" >客户反馈英文稿意见，英文稿修改中</option>
+                <{/if}> 
+                
+                <{if $mate[0]['recd2_mate']=="定稿"}>
+                    <option value="定稿" selected="selected">定稿</option>
+                <{else}>    
+                    <option value="定稿">定稿</option>
+                <{/if}>
+                </select></td>
+          </tr>
+          <tr>  
+            <td bgcolor="#97D6FF" height="25" width="27%" align="center"><b>简历(CV)</b></td>
+            <td><select disabled="disabled" name="cv">
+              <{if $mate[0]['cv_mate']=="客户初稿准备中"}>
+            		<option value="客户初稿准备中" selected="selected">客户初稿准备中</option>
+                <{else}>
+              		<option value="客户初稿准备中">客户初稿准备中</option>
+              	<{/if}>
+                
+                <{if $mate[0]['cv_mate']=="已收到客户初稿，尚未反馈客户意见"}>    
+                    <option value="已收到客户初稿，尚未反馈客户意见" selected="selected">已收到客户初稿，尚未反馈客户意见</option>
+                <{else}>
+                	<option value="已收到客户初稿，尚未反馈客户意见">已收到客户初稿，尚未反馈客户意见</option>
+                <{/if}>
+                
+                <{if $mate[0]['cv_mate']=="初稿定稿，英文稿准备中"}>  
+                    <option value="初稿定稿，英文稿准备中" selected="selected">初稿定稿，英文稿准备中</option>
+                <{else}>
+                	<option value="完成英文稿，已发客户确认中" >完成英文稿，已发客户确认中</option>
+                <{/if}> 
+                
+                <{if $mate[0]['cv_mate']=="完成英文稿，已发客户确认中"}>  
+                    <option value="完成英文稿，已发客户确认中" selected="selected">完成英文稿，已发客户确认中</option>
+                <{else}>
+                	<option value="完成英文稿，已发客户确认中" >完成英文稿，已发客户确认中</option>
+                <{/if}> 
+                
+                <{if $mate[0]['cv_mate']=="客户反馈英文稿意见，英文稿修改中"}>  
+                    <option value="客户反馈英文稿意见，英文稿修改中" selected="selected">客户反馈英文稿意见，英文稿修改中</option>
+                <{else}>
+                	<option value="客户反馈英文稿意见，英文稿修改中" >客户反馈英文稿意见，英文稿修改中</option>
+                <{/if}> 
+                
+                <{if $mate[0]['cv_mate']=="定稿"}>
+                    <option value="定稿" selected="selected">定稿</option>
+                <{else}>    
+                    <option value="定稿">定稿</option>
+                <{/if}>
+            </select></td>
+          </tr>  
+          <tr>
+            <td bgcolor="#97D6FF" height="25" width="10%" align="center"><b>个人陈述(PS)</b></td>	
+            <td><select disabled="disabled" name="ps">
+            <{if $mate[0]['ps_mate']=="客户初稿准备中"}>
+            		<option value="客户初稿准备中" selected="selected">客户初稿准备中</option>
+                <{else}>
+              		<option value="客户初稿准备中">客户初稿准备中</option>
+              	<{/if}>
+                
+                <{if $mate[0]['ps_mate']=="已收到客户初稿，尚未反馈客户意见"}>    
+                    <option value="已收到客户初稿，尚未反馈客户意见" selected="selected">已收到客户初稿，尚未反馈客户意见</option>
+                <{else}>
+                	<option value="已收到客户初稿，尚未反馈客户意见">已收到客户初稿，尚未反馈客户意见</option>
+                <{/if}>
+                
+                <{if $mate[0]['ps_mate']=="初稿定稿，英文稿准备中"}>  
+                    <option value="初稿定稿，英文稿准备中" selected="selected">初稿定稿，英文稿准备中</option>
+                <{else}>
+                	<option value="初稿定稿，英文稿准备中" >初稿定稿，英文稿准备中</option>
+                <{/if}> 
+                
+                <{if $mate[0]['ps_mate']=="完成英文稿，已发客户确认中"}>  
+                    <option value="完成英文稿，已发客户确认中" selected="selected">完成英文稿，已发客户确认中</option>
+                <{else}>
+                	<option value="完成英文稿，已发客户确认中" >完成英文稿，已发客户确认中</option>
+                <{/if}> 
+                
+                <{if $mate[0]['ps_mate']=="客户反馈英文稿意见，英文稿修改中"}>  
+                    <option value="客户反馈英文稿意见，英文稿修改中" selected="selected">客户反馈英文稿意见，英文稿修改中</option>
+                <{else}>
+                	<option value="客户反馈英文稿意见，英文稿修改中" >客户反馈英文稿意见，英文稿修改中</option>
+                <{/if}> 
+                
+                <{if $mate[0]['ps_mate']=="定稿"}>
+                    <option value="定稿" selected="selected">定稿</option>
+                <{else}>    
+                    <option value="定稿">定稿</option>
+                <{/if}>
+                </select></td>
+          </tr>  
+          <tr>
+            <td bgcolor="#97D6FF" height="25" width="20%" align="center"><b>申请表</b></td>
+            <td><select disabled="disabled" name="aply">
+            	<{if $mate[0]['aply_mate']=="客户准备中"}>
+            		<option value="客户准备中" selected="selected">客户准备中</option>
+                <{else}>
+              		<option value="客户准备中">客户准备中</option>
+              	<{/if}>
+                
+                <{if $mate[0]['aply_mate']=="已收到"}>    
+                    <option value="已收到" selected="selected">已收到</option>
+                <{else}>
+                	<option value="已收到">已收到</option>
+                <{/if}>
+                </select></td>
+          </tr>  
+          <tr>
+            <td bgcolor="#97D6FF" height="25" width="10%" align="center"><b>电子版材料</b></td>
+            <td><select disabled="disabled" name="acdc">
+            	<{if $mate[0]['acdc_mate']=="客户准备中"}>
+            		<option value="客户准备中" selected="selected">客户准备中</option>
+                <{else}>     
+                    <option value="客户准备中">客户准备中</option>
+                <{/if}> 
+                <{if $mate[0]['acdc_mate']=="电子版材料已齐全"}> 
+                    <option value="电子版材料已齐全" selected="selected">电子版材料已齐全</option>
+                <{else}>     
+                    <option value="电子版材料已齐全">电子版材料已齐全</option>
+                <{/if}>
+                
+                </select></td>
+  		</tr>
+        <tr>
+            <td bgcolor="#97D6FF" height="25" width="10%" align="center"><b>*纸质材料</b></td>
+            <td><select disabled="disabled" name="pic">
+            	<{if $mate[0]['pic_mate']=="未收到"}> 
+            		<option value="未收到" selected="selected">未收到</option>
+                <{else}>     
+                	<option value="未收到">未收到</option>
+                <{/if}>
+   				<{if $mate[0]['pic_mate']=="已收到"}> 
+                    <option value="已收到" selected="selected">已收到</option>
+                <{else}> 
+                    <option value="已收到">已收到</option>
+                <{/if}>    
+                </select></td>
+  		</tr>
+         <tr>
+            <td bgcolor="#97D6FF" height="25" width="10%" align="center"><b>客户显示</b></td>
+            <td><select disabled="disabled" name="show">
+            	<{if $mate[0]['show_mate']==0}> 
+            		<option value="0" selected="selected">不显示</option>
+                <{else}>     
+                	<option value="0">不显示</option>
+                <{/if}>
+   				<{if $mate[0]['show_mate']==1}> 
+                    <option value="1" selected="selected">显示</option>
+                <{else}> 
+                    <option value="1">显示</option>
+                <{/if}>    
+                </select></td>
+  		</tr>
+        <tr>
+            <td bgcolor="#97D6FF" height="25" width="10%" align="center"><b>修改时间</b></td>
+        	<td><{$mate[0]['time_mate']}></td>
+        </tr>
+</table>
+<table width="55%" align="center" cellspacing="0px" border="0">
+	<tr><td height="20"></td></tr>
+	<tr><td width="15%"></td>
+    	<td width="85%"><input type="button" value="更改" onclick="clearReadOnly()">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="保存">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="取消" onclick="window.location.reload();"></td></tr>
+    <tr><td height="15"></td></tr>
+	<tr>
+	  <td height="30" colspan="2">*包括：成绩单，在读证明，推荐信和照片</td></tr>
+</table>
+</form>
+<script type="text/javascript"> 
+	function clearReadOnly(){ 
+		document.form.recd1.disabled=false; 
+		document.form.recd2.disabled=false; 
+		document.form.cv.disabled=false; 
+		document.form.ps.disabled=false; 
+		document.form.aply.disabled=false; 
+		document.form.pic.disabled=false; 
+		document.form.acdc.disabled=false; 	
+		document.form.show.disabled=false; 	
+	} 
+</script>
+
+
+</BODY></HTML>

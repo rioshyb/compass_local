@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+</HEAD><script language="javascript">
+	function is_confirm(msg)
+	{
+		if(confirm(msg)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+</script>
+<BODY>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background="tpl/admin/images/title_bg1.jpg">当前位置: <font color='#0000CC'><{$position}></font></TD></TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR>
+  <TR height=20>
+    <TD background="tpl/admin/images/shadow_bg.jpg" ></TD></TR></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background="tpl/admin/images//title_bg2.jpg" ><{$position}>列表</TD></TR>
+  </TABLE>  
+<form  name="form" action="<{spUrl c=admin a=univ}>" method="post">
+<table width="95%" align="center">
+	<tr>
+    	<td height="35" width="8%" align="right">国家分类：
+        </td>
+        <td height="35" width="24%" align="left">
+        <select name="cy" id="cy">
+        	<{foreach from=$country item=one}>
+				<option value="<{$one.id_ctry}>"><{$one.cname_ctry}></option>
+			<{/foreach}>
+        </select>    
+        </td>
+        <td height="35" width="12%" align="right">学校名称：
+        </td>
+        <td height="35" width="39%" align="left"><input type="text" name="univ" id="univ" width="100%" />
+        <td height="35" width="16%" align="left"><input type="submit" name="button" id="button" value="查询" />
+        </td>
+        <td width="1%"></td>
+	</tr>
+</table>
+</form>
+<table width="95%" align="center" border="1px" cellspacing="0px" bordercolor="#CCCCCC">
+	  <tr bgcolor="#97D6FF">
+            <td height="25" width="16%" align="center">学校中文名</td>
+            <td height="25" width="50%" align="center">学校英文名</td>
+            <td height="25" width="10%" align="center">所属国家</td>
+            <td height="25" width="24%" align="center">操作</td>
+        </tr> 
+</table> 
+</BODY></HTML>

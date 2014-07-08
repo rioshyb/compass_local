@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+</HEAD><script language="javascript">
+	function is_confirm(msg)
+	{
+		if(confirm(msg)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+</script>
+<script src="tpl/admin/js/jquery-1.7.2.min.js" ></script>
+<script >
+$(document).ready(function() {
+//Edit My Basic Info Btn click will trigger this 
+            $('#editMyBasicInfoBtn').click(function(){
+                 $(this).parents('form') // For each element, pick the ancestor that's a form tag.
+                       .find(':input') // Find all the input elements under those.
+                       .each(function(i) {
+                        $(this).prop("readonly",false);
+                        $(this).removeClass("readonly");
+                });
+				$(this).parents('form') // For each element, pick the ancestor that's a form tag.
+                       .find(':textarea') // Find all the input elements under those.
+                       .each(function(i) {
+                        $(this).prop("readonly",false);
+                        $(this).removeClass("readonly");
+                });	   
+            });
+});
+</script>
+<BODY>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD width="68%" background="tpl/admin/images/title_bg1.jpg">当前位置：<font color='#0000CC'><{$position}></font>&nbsp;&nbsp;&nbsp;&nbsp;客户账号：<font color='#0000CC'><{$custom[0]['name_cust']}></font>&nbsp;&nbsp;&nbsp;&nbsp;客户姓名：<font color='#0000CC'><{$custom[0]['cname_cust']}></font></td></TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR>
+  <TR height=20>
+    <TD background="tpl/admin/images/shadow_bg.jpg" ></TD></TR></TABLE>
+<table width="100%">
+  <tr>
+  	<td width="7%" height="30"></td>
+  	<td width="22%">
+    &nbsp;&nbsp;&nbsp;&nbsp;<a href="<{spUrl c=sales a=order id=$id ts=2}>">付费管理</a></td>
+    <td width="22%" >&nbsp;&nbsp;&nbsp;&nbsp;<a href="<{spUrl c=sales a=mate id=$id}>">材料明细</a></td>
+    <td width="24%" >&nbsp;&nbsp;&nbsp;&nbsp;<a href="<{spUrl c=sales a=aply id=$id}>">申请进度</a></td>
+    <td width="25%" >&nbsp;&nbsp;&nbsp;&nbsp;<a href="<{spUrl c=sales a=tour id=$id}>">行程准备</a></td> 
+  </tr>  
+</table>      
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background="tpl/admin/images//title_bg2.jpg" ><{$position}></TD></TR>
+</TABLE>
+<table width="100%">
+<tr>
+    	<td width="5%" height="30"></td>   
+    	<td width="95%">订单类型：<a href="<{spUrl c=sales a=order id=$id ts=1}>">新订单生成</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    	<a href="<{spUrl c=sales a=order id=$id ts=2}>">未付款订单</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    	<a href="<{spUrl c=sales a=order id=$id ts=3}>">已付款订单</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    	<a href="<{spUrl c=sales a=order id=$id ts=4}>">退款订单</a>
+    	</td>
+    </tr> 
+</table> 
+<table width="95%" align="center" cellspacing="1px"  >
+          <tr bgcolor="#97D6FF">
+            <td height="25" width="15%" align="center"><b>订单号</b></td>
+            <td height="25" width="16%" align="center"><b>订单名称</b></td>
+            <td height="25" width="27%" align="center"><b>订单说明</b></td>
+            <td height="25" width="10%" align="center"><b>金额</b></td>
+            <td height="25" width="20%" align="center"><b>下单时间</b></td>
+            <td height="25" width="10%" align="center"><b>付款状态</b></td>
+        </tr>
+  </table>
+<{foreach from=$orders item=one}>  
+<form action="<{spUrl c=sales a=ordere oid=$one.id_order id=$id}>" method="post" id="myBasicInfo">
+  <table class="univs" width="95%" align="center" cellspacing="1px" >      
+
+          <tr>
+           <td width="15%" align="center"><{$one.code_order}></td>
+           <td width="16%" align="center">
+           	<input type="text" name="item" readonly="readonly"  class="readonly" value="<{$one.item_order}>" /></td>
+           <td width="27%" align="left">
+           	<textarea name="desc" readonly="readonly" cols="30%" rows="6"  class="readonly" ><{$one.desc_order}></textarea></td> 
+                  
+           <td width="10%" align="center">
+           	<input type="text" name="price" style="text-align: right;" size="8" readonly="readonly"  class="readonly" value="<{$one.price_order}>" />元</td>
+           <td width="20%" align="center"><{$one.ct_order}></td>
+           <td width="10%" align="center">客户未付款</td>
+    </tr>
+
+ <tr>
+      <td ></td>
+      <td class="value" colspan="3">
+      	<input type="button" value="编辑" id="editMyBasicInfoBtn" name="editMyBasicInfoBtn" /> &nbsp;&nbsp;
+        <input type="submit" value="保存" />&nbsp;&nbsp;
+        <input type="button" value="取消" onclick="window.location.reload();" />
+       </td>
+      <td colspan="2" align="right" ><a href="<{spUrl c=sales a=orderl oid=$one.id_order id=$id}>" onclick="return is_confirm('确认要删除吗?');">删除这条订单</a>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    </tr>
+</table>
+</form>
+<{/foreach}>
+</BODY></HTML>

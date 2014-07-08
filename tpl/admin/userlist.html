@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<LINK href="tpl/admin/css/admin.css" type="text/css" rel="stylesheet">
+</HEAD><script language="javascript">
+	function is_confirm(msg)
+	{
+		if(confirm(msg)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+</script>
+<BODY>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+  <TR height=28>
+    <TD background="tpl/admin/images/title_bg1.jpg">当前位置: <font color='#0000CC'><{$position}></font></TD></TR>
+  <TR>
+    <TD bgColor=#b1ceef height=1></TD></TR>
+  <TR height=20>
+    <TD background="tpl/admin/images/shadow_bg.jpg" ></TD></TR></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="95%" align=center border=0>
+  <TR height=22>
+    <TD style="PADDING-LEFT: 20px; FONT-WEIGHT: bold; COLOR: #ffffff" 
+    align=middle background="tpl/admin/images//title_bg2.jpg" >用户列表</TD></TR>
+  </TABLE>
+<p>&nbsp;</p>
+<table width="67%" align="center" border="1px" cellspacing="0px" bordercolor="#CCCCCC">
+<tr bgcolor="#97D6FF">
+            <td style="PADDING-LEFT: 20px;" height="30" width="31%" align="center">用户名</td>
+            <td height="30" width="36%" align="center">权限组</td>
+            <td height="30" width="33%" align="center">操作</td>
+  </tr> 
+          <{foreach from=$userlist item=one}>
+          <tr>
+            <td height="30" width="31%" align="center"><{$one.name_user}></td>
+            <{if $one.acl_user=="GBUSER"}>
+            <td height="30" width="36%" align="center"><{'普通管理员'}></td>
+            <{elseif $one.acl_user=="SALES"}>
+            <td height="30" width="36%" align="center"><{'销售人员'}></td>
+            <{else}>
+            <td height="30" width="36%" align="center"><{'高级管理员'}></td>
+            <{/if}>
+            <td height="30" width="33%" align="center"><a href="<{spUrl c=perms a=addu 
+            }>" >新增</a>/ <a href="<{spUrl c=perms a=edit 
+            name=$one.name_user group=$one.acl_user}>" >修改</a>/
+            <a href="<{spUrl c=perms a=delu id=$one.id_user }>" 
+            	onclick="return is_confirm('确认要删除吗?');">删除</a></td>
+          </tr> 
+          <{/foreach}>
+        </table>
+</BODY></HTML>
